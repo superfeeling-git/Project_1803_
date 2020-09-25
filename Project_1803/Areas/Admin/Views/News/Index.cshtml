@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户列表-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            getData();
+
+            //监听页面事件
+            $('#myPager').pager({
+                page: 1,
+                recPerPage: 10,
+                recTotal: 100,
+                onPageChange: function (state, oldState) {
+                    if (state.page !== oldState.page) {
+                        console.log('页码从', oldState.page, '变更为', state.page);
+                        getData({
+                            PageIndex : state.page,
+                            Title: $("#Keyword").val(),
+                            ClassId: $("#ClassId").val()
+                        });
+                    }
+                }
+            });
+
+            //执行搜索
+            $(".search button.searchbtn").click(function () {
+                getData({
+                    Title: $("#Keyword").val(),
+                    ClassId: $("#ClassId").val()
+                });
+            })
+
+            // 获取分页器实例对象
+            var myPager = $('#myPager').data('zui.pager');
+
+            //获取分页数据
+            function getData(setting) {
+                var data = {
+                    PageIndex : 1
+                };
+
+                //扩展、合并
+                $.extend(data, setting);
+
+                $.ajax({
+                    url: "@Url.Action("List")",
+                    type: "get",
+                    //dataType: "json",
+                    data: data,
+                    success: function (d) {
+                        $("table.list tbody").empty().append(d);
+
+                         //设置当前页码为 4，并同时设置记录总数为 100， 每页记录数目为 30
+                        myPager.set({
+                            recTotal: TotalCount,
+                            recPerPage: PageSize
+                        });
+                    }
+                })
+            }
+
+            //全选
+            $("#chkAll").click(function () {
+                var state = $(this).prop("checked");
+                //全选
+                $("table.list tbody input").prop("checked", state);
+            })
+
+            //批删
+            $(".batchDel").click(function () {
+                //当前行
+                var obj = $(this).parents("tr");
+
+                var idList = new Array();
+
+                $("table.list tbody input:checked").each(function (i, e) {
+                    idList.push($(e).val());
+                });
+
+                //至少选择一条
+                if (idList.length == 0) {
+                    ShowMsg("至少选择一条");
+                    return;
+                }
+
+                BatchOperator({
+                    url: "@Url.Action("Delete")",
+                    data: { idList: idList.toString() },
+                    callback: function (d) {
+                        ShowMsg(d);
+                        $("table.list tbody input:checked").parents("tr").remove();
+                    }
+                });
+            })
+
+
+            $("body").on("click", ".delete", function () {
+                var id = $(this).attr("id");
+                var obj = $(this).parents("tr");
+
+                BatchOperator({
+                    url: "@Url.Action("Delete")",
+                    data: { idList: id },
+                    callback: function (d) {
+                        ShowMsg(d);
+                        obj.remove();
+                    }
+                });
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">文章列表</div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-12 search">
+                        <div>分类：</div>
+                        <div>
+                            @Html.Action("Index", "ClassList", new { TableName = "NewsClass", FirstText = "请选择" })
+                        </div>
+                        <div>标题关键字：</div>
+                        <div>
+                            <input type="text" class="form-control" name="Keyword" id="Keyword" />
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary searchbtn"> 搜索 </button>
+                            <button type="button" class="btn btn-danger batchDel"> 批量删除 </button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered list">
+                    <thead>
+                        <tr>
+                            <th width="5%">
+                                <label><input type="checkbox" id="chkAll"/> 全选</label>
+                            </th>
+                            <th>所属分类</th>
+                            <th>标题</th>
+                            <th>时间</th>
+                            <th>是否外链</th>
+                            <th>是否首页</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+
+                <ul id="myPager" class="pager"></ul>
+            </div>
+        </div>
+    </div>
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>

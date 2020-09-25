@@ -1,0 +1,217 @@
+﻿@model NewsModel
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统设置-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/lib/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/lib/colorpicker/zui.colorpicker.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/lib/datetimepicker/datetimepicker.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/lib/uploader/zui.uploader.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/kindeditor/kindeditor-all.js"></script>
+    <script src="~/kindeditor/lang/zh-CN.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <style type="text/css">
+        .input-group-btn{left:-1px;}
+        .colorpicker .dropdown-toggle {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            @if(!string.IsNullOrWhiteSpace(Request.QueryString["info"]))
+            {
+                @:ShowMsg("@Request.QueryString["info"]");
+            }
+
+
+            $("#Title").change(function () {
+                $("#Title").css("color", $("#TitleColor").val());
+            })
+
+            $("#IsLink").change(function () {
+                if ($(this).prop("checked"))
+                    $(".linkurl").show("slow");
+                else
+                    $(".linkurl").hide("fast");
+            })
+
+            // 仅选择日期
+            $(".form-date").datetimepicker({
+            weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0,
+                format: "yyyy-mm-dd"
+            });
+
+            $('#myUploader').uploader({
+                autoUpload: false,            // 当选择文件后立即自动进行上传操作
+                url: '@Url.Action("UploadFile")',  // 文件上传提交地址
+                limitFilesCount : 1,
+                filters: {
+                    // 只允许上传图片或图标（.ico）
+                    mime_types: [
+                        { title: '图片', extensions: 'jpg,gif,png' },
+                        { title: '图标', extensions: 'ico' }
+                    ],
+                    // 最大上传文件为 1MB
+                    max_file_size: '1mb',
+                    // 不允许上传重复文件
+                    prevent_duplicates: true
+                },
+                onFileUploaded: function (file, responseObject) {
+                    var jsonObj = JSON.parse(responseObject.response);
+
+                    $("#NewsImg").val(jsonObj.url);                    
+
+                    console.log(jsonObj.url);
+                    console.log(file);
+                }
+            });
+
+
+            KindEditor.ready(function (K) {
+                window.editor = K.create('#Content', {
+                    uploadJson: '/kindeditor/asp.net/upload_json.ashx',
+                    fileManagerJson: '/kindeditor/asp.net/file_manager_json.ashx',
+                    allowFileManager: true,
+                });
+            });
+
+            $("form").submit(function () {
+                if ($("#ClassId").val().length == 0) {
+                    ShowMsg("请选择分类");
+                    return false;
+                }
+
+                if ($("#IsLink").prop("checked") && $("#LinkUrl").val().length == 0) {
+                    ShowMsg("请输入外链的地址");
+                    return false;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">管理员添加 @ViewContext.RouteData.Values["id"]</div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="@Url.Action("Create")" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-1">标题</label>
+                        <div class="input-group col-lg-10" style="padding-left:10px; padding-right:9px;">
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                            <span class="input-group-btn">
+                                <input class="form-control" name="TitleColor" id="TitleColor" data-provide="colorpicker" type="hidden" value="" />
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Title)
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">作者</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Author)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">来源</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Source, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Source)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">添加时间</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.AddTime, new { @class = "form-control form-date", placeholder = "选择或者输入一个日期：yyyy-MM-dd" })
+                            @Html.ValidationMessageFor(m => m.AddTime)
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">所属分类</label>
+                        <div class="col-lg-10">
+                            @Html.Action("Index", "ClassList", new { TableName = "NewsClass", FirstValue = "", FirstText = "请选择" });
+                            @Html.ValidationMessageFor(m => m.ClassID)
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">是否外链</label>
+                        <div class="col-lg-10">
+                            <div class="switch">
+                                <input type="checkbox" value="True" name="IsLink" id="IsLink">
+                                <label>夜间模式</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group linkurl">
+                        <label class="col-lg-1">链接URL</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.LinkUrl, new { @class = "form-control", placeholder = "请输入一个链接地址" })
+                            @Html.ValidationMessageFor(m => m.LinkUrl)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">是否首页</label>
+                        <div class="col-lg-10">
+                            <div class="switch">
+                                <input type="checkbox" value="True" name="IsHome" id="IsHome">
+                                <label>&nbsp;</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">图片上传</label>
+                        <div class="col-lg-10">
+                            <div id='myUploader' class="uploader">
+                                <div class="uploader-message text-center">
+                                    <div class="content"></div>
+                                    <button type="button" class="close">×</button>
+                                </div>
+                                <div class="uploader-files file-list file-list-lg" data-drag-placeholder="请拖拽文件到此处"></div>
+                                <div class="uploader-actions">
+                                    <div class="uploader-status pull-right text-muted"></div>
+                                    <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+                                    <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传</button>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.NewsImg)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">新闻内容</label>
+                        <div class="col-lg-10">
+                            @Html.TextAreaFor(m => m.Content, new { style = "width:100%;height:400px;" });
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <script src="~/Areas/Admin/Content/dist/lib/colorpicker/zui.colorpicker.js"></script>
+    <script src="~/Areas/Admin/Content/dist/lib/datetimepicker/datetimepicker.js"></script>
+    <script src="~/Areas/Admin/Content/dist/lib/uploader/zui.uploader.js"></script>
+</body>
+</html>

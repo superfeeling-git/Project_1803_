@@ -1,0 +1,91 @@
+﻿@model RoleModel
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统设置-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Areas/Admin/Content/zTree_v3/js/jquery.ztree.core.js"></script>
+    <script src="~/Areas/Admin/Content/zTree_v3/js/jquery.ztree.excheck.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <SCRIPT type="text/javascript">
+		<!--
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+
+        var zNode = [];
+        $.ajax({
+            url: "@Url.Action("getJson")",
+            type: "get",
+            data: {"idList":"@string.Join(",", Model.sysClassID)"},
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                //console.log(d);
+                zNode = d;
+            }
+        })
+
+
+        $(document).ready(function () {
+            var treeObj = $.fn.zTree.init($("#treeDemo"), setting, zNode);
+
+            $("form").submit(function () {
+                var nodes = treeObj.getCheckedNodes(true);
+
+                var idList = [];
+                nodes.forEach(function (o, i) {
+                    idList.push(o.id);
+                })
+
+                $("input[name=idList]").val(idList.join(","));
+            })
+
+
+        });
+            //-->
+    </SCRIPT>
+</head>
+<body>
+    <div class="container-fluid">        
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">系统设置</div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="@Url.Action("Edit")">
+                    <div class="form-group">
+                        <label>角色名称</label>
+                        @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", placeholder = "请输入角色名称" })
+                        @Html.ValidationMessageFor(m => m.RoleName)
+                    </div>
+                    <div class="form-group">
+                        <label>角色权限</label>
+                        <ul id="treeDemo" class="ztree"></ul>
+                        <input type="hidden" name="idList" />
+                    </div>
+                    @Html.HiddenFor(m => m.RoleID)
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

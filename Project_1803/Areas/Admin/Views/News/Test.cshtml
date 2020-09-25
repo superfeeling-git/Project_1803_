@@ -1,0 +1,94 @@
+﻿@model NewsModel
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统设置-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">管理员添加</div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="@Url.Action("Create")" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-1">标题</label>
+                        <div class="input-group col-lg-10" style="padding-left:10px; padding-right:9px;">
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                            <span class="input-group-btn">
+                                <input class="form-control" name="TitleColor" id="TitleColor" data-provide="colorpicker" type="hidden" value="" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">作者</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Author)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">来源</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Source, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Source)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">添加时间</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.AddTime, new { @class = "form-control form-date", placeholder = "选择或者输入一个日期：yyyy-MM-dd" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">所属分类</label>
+                        <div class="col-lg-10">
+                            @Html.Action("Index", "NewsClassList")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">是否外链</label>
+                        <div class="col-lg-10">
+                            <div class="switch">
+                                <input type="checkbox" name="IsLink" id="IsLink">
+                                <label>夜间模式</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group linkurl">
+                        <label class="col-lg-1">链接URL</label>
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.LinkUrl, new { @class = "form-control", placeholder = "请输入一个链接地址" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-1">是否首页</label>
+                        <div class="col-lg-10">
+                            <div class="switch">
+                                <input type="checkbox" name="IsHome" id="IsHome">
+                                <label>夜间模式</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+</body>
+</html>

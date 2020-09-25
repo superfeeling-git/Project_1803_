@@ -1,0 +1,125 @@
+﻿@model IList<SysClassModel>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#frame").height($(window).height() - 100)
+        })
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-fixed-top bg-primary">
+                <div class="navbar-header">
+                    <a class="navbar-toggle" href="javascript:;" data-toggle="collapse" data-target=".navbar-collapse"><i class="icon icon-th-large"></i></a>
+                    <a class="sidebar-toggle" href="javascript:;" data-toggle="push-menu"><i class="icon icon-bars"></i></a>
+                    <a class="navbar-brand" href="#">
+                        <span class="logo">ZUIAdmin</span>
+                        <span class="logo-mini">ZA</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li><a href="javascript:;" data-toggle="push-menu"><i class="icon icon-bars"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <span>
+                                        <i class="icon icon-bell-alt"></i>
+                                        <span class="label label-danger label-pill up">5</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <span>
+                                        <i class="icon icon-envelope-alt"></i>
+                                        <span class="label label-success label-pill up">2</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:;" data-toggle="dropdown"><i class="icon icon-user"></i> 管理员 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">资料设置</a></li>
+                                    <li><a href="#">清除缓存</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="@Url.Action("Logout")">注销</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="active">
+                        <a href="javascript:;">
+                            <i class="icon icon-dashboard"></i>
+                            <span>仪表盘</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+                    @foreach (var item in Model.Where(m => m.Depth == 0))
+                    {
+                        <li class="treeview">
+                            <a href="javascript:;">
+                                <i class="icon icon-file"></i>
+                                <span>@item.ClassName</span>
+                                <span class="pull-right-container">
+                                    <i class="icon icon-angle-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                @foreach (var menu in Model.Where(m=>m.ParentID == item.ClassID))
+                                {
+                                    <li><a href="@menu.URL" target="main"><i class="icon icon-circle-blank"></i> @menu.ClassName</a></li>
+                                }
+                            </ul>
+                        </li>
+
+                    }
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <div class="content-header">
+                <ul class="breadcrumb">
+                    <li><a href="#"><i class="icon icon-home"></i></a></li>
+                    <li class="active">仪表盘</li>
+                </ul>
+            </div>
+            <div class="content-body">
+                <div class="container-fluid" id="frame">
+                    <iframe name="main" src="@Url.Action("Right")" frameborder="0" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>

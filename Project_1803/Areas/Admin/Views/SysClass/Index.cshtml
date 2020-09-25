@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Project.MODEL.Model.SysClassModel>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户列表-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".add").click(function () {
+                $.zui.modalTrigger.show({
+                    iframe: "@Url.Action("Create")",
+                    width: $(window).width() * 0.6,
+                    height: 320,
+                    title:"添加分类",
+                    hidden: function () {
+                        ShowMsg("添加分类成功");
+                        window.location.reload();
+                    }
+                });
+            })
+
+            $(".edit").click(function () {
+                var obj = $(this);
+
+                $.zui.modalTrigger.show({
+                    iframe: "@Url.Action("Edit")?id=" + obj.data("id"),
+                    width: $(window).width() * 0.6,
+                    height: 320,
+                    title:"编辑分类",
+                    hidden: function () {
+                        ShowMsg("编辑分类成功");
+                        window.location.reload();
+                    }
+                });
+            })
+
+            $(".create").click(function () {
+                var obj = $(this);
+
+                $.zui.modalTrigger.show({
+                    iframe: "@Url.Action("Create")/" + obj.data("id"),
+                    width: $(window).width() * 0.6,
+                    height: 320,
+                    title:"添加子分类",
+                    hidden: function () {
+                        ShowMsg("添加子分类成功");
+                        window.location.reload();
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">        
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">分类列表</div>
+            </div>
+            <div class="panel-body">
+                <div class="table-tools" style="margin-bottom: 15px;">                    
+                    <div class="tools-group">
+                        <a href="#" class="btn btn-primary add"><i class="icon icon-plus-sign"></i> 新增</a>
+                        <a href="#" class="btn btn-success"><i class="icon icon-check-circle"></i> 启用</a>
+                        <a href="#" class="btn btn-warning"><i class="icon icon-ban-circle"></i> 禁用</a>
+                        <a href="#" class="btn btn-danger"><i class="icon icon-remove-sign"></i> 删除</a>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="5%">
+                                分类ID
+                            </th>
+                            <th width="30%">分类名称</th>
+                            <th width="30%">URL</th>
+                            <th width="20%">URL</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.ClassID</td>
+                            <td>
+                                @{ if (item.ParentID == 0)
+                                    {
+                                        @Html.Raw($"<b>{item.ClassName}</b>")
+                                    }
+                                    else
+                                    {
+                                        string nbsp = "|";
+                                        for (int i = 0; i < item.Depth * 3; i++)
+                                        {
+                                            nbsp += "-&nbsp;";
+                                        }
+                                        @Html.Raw($"{nbsp}├{item.ClassName}")
+                                    }
+                                }
+                            </td>
+                            <td>@item.URL</td>
+                            <td>@Html.Raw(item.IsShow ? "是" : "否")</td>
+                            <td>
+                                <a href="javascript:;" data-id="@item.ClassID" class="btn btn-xs btn-primary edit">编辑</a>
+                                <a href="@Url.Action("Delete",new { id = item.ClassID })" class="btn btn-xs btn-danger delete">删除</a>
+                                <a href="javascript:;" data-id="@item.ClassID" class="btn btn-xs btn-warning create">增加子分类</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>

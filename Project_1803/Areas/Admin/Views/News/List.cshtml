@@ -1,0 +1,22 @@
+﻿@model PageModel<NewsModel>
+
+@foreach (var item in Model.PageData)
+{
+    <tr>
+        <td align="center"><input type="checkbox" value="@item.NewsID" id="NewsID" name="NewsID" /></td>
+        <td>@item.ClassName</td>
+        <td style="color:@item.TitleColor">@item.Title</td>
+        <td>@item.AddTime</td>
+        <td>@Html.Raw(item.IsLink ? "是" : "否")</td>
+        <td>@Html.Raw(item.IsHome ? "是" : "否")</td>
+        <td>
+            <a href="@Url.Action("Edit",new { id = item.NewsID })">编辑</a>
+            <a href="javascript:;" id="@item.NewsID" class="delete">删除</a>
+        </td>
+    </tr>
+}
+
+<script type="text/javascript">
+    var TotalCount = @Model.TotalCount;
+    var PageSize = @Model.PageSize;
+</script>

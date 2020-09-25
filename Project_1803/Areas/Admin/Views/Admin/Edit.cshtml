@@ -1,0 +1,79 @@
+﻿@model AdminModel
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统设置-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/lib/chosen/chosen.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('select.chosen-select').chosen({
+                no_results_text: '没有找到',    // 当检索时没有找到匹配项时显示的提示文本
+                disable_search_threshold: 10, // 10 个以下的选择项则不显示检索框
+                search_contains: true         // 从任意位置开始检索
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">        
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">管理员修改</div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="@Url.Action("Edit")">
+                    <div class="form-group">
+                        <label>用户名</label>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" class="form-control" name="Password" id="Password" />
+                        <div style="color:red">密码不改请留空</div>
+                    </div>
+                    <div class="form-group">
+                        <label>对应角色
+                        </label>
+                        <select name="RoleId" data-placeholder="使用拼音检索，试试“m”或“xm”" class="chosen-select form-control" tabindex="2" multiple="">
+                            <option value=""></option>
+                            @foreach (var item in ViewBag.Roles as IList<RoleModel>)
+                            {
+                                string select = string.Empty;
+                                foreach (var id in Model.RoleId)
+                                {
+                                    if(item.RoleID == id)
+                                    {
+                                        select = "selected=\"selected\"";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        select = "";
+                                    }
+                                }
+                                <option value="@item.RoleID" data-keys="xiaomao xm 猫科动物" @select>@item.RoleName</option>
+                            }
+                        </select>
+                    </div>
+                    @Html.HiddenFor(m => m.AdminID)
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <script src="~/Areas/Admin/Content/dist/lib/chosen/chosen.min.js"></script>
+</body>
+</html>

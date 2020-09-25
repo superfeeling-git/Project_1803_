@@ -1,0 +1,64 @@
+﻿@model IEnumerable<RoleModel>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户列表-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>    
+</head>
+<body>
+    <div class="container-fluid">        
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">分类列表</div>
+            </div>
+            <div class="panel-body">
+                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="5%">
+                                角色ID
+                            </th>
+                            <th width="40%">角色名称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th width="5%">
+                                    @item.RoleID
+                                </th>
+                                <th width="40%">@item.RoleName</th>
+                                <th>
+                                    <a href="@Url.Action("Edit",new { id= item.RoleID })" class="btn btn-primary">
+                                        编辑
+                                    </a>
+                                    <a href="@Url.Action("Delete",new { id= item.RoleID })" class="btn btn-danger">
+                                        删除
+                                    </a>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>

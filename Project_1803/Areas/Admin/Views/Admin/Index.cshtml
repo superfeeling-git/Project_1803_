@@ -1,0 +1,89 @@
+﻿@model IEnumerable<AdminModel>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户列表-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("a.delete").click(function () {
+                var id = $(this).attr("id");
+                //当前行
+                var obj = $(this).parents("tr");
+
+                BatchOperator({
+                    url: "@Url.Action("Delete")",
+                    data: { id: id },
+                    callback: function (d) {
+                        ShowMsg(d);
+                        obj.remove();
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">        
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">管理员列表</div>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="7%">
+                                管理员ID
+                            </th>
+                            <th>用户名</th>
+                            <th>末次登录IP</th>
+                            <th>末次登录时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @item.AdminID
+                            </td>
+                            <td>@item.UserName</td>
+                            <td>
+                                @Html.Raw(string.IsNullOrWhiteSpace(item.LastLoginIP) ? "-" : item.LastLoginIP)
+                            </td>
+                            <td>
+                                @Html.Raw(item.LastLoginTime == null ? "-" : string.Format("{0:yyyy-MM-dd}", item.LastLoginTime))
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit",new { id= item.AdminID })" class="btn btn-primary">
+                                    编辑
+                                </a>
+                                <a href="javascript:;" id="@item.AdminID" class="btn btn-danger delete">
+                                    删除
+                                </a>
+                            </td>
+                        </tr>}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@model Project.MODEL.NewsClassModel
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统设置-页面演示 zui-admin</title>
+    <!-- zui css -->
+    <link href="~/Areas/Admin/Content/dist/css/zui.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/theme/blue.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="~/Areas/Admin/Content/css/app.css" rel="stylesheet" />
+    <!-- jquery js -->
+    <script src="~/Areas/Admin/Content/dist/lib/jquery/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/Common.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <style type="text/css">
+        form {
+            margin-top: 2em;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("button").click(function () {
+                if ($("#ClassName").val().trim() == "") {
+                    ShowMsg("请输入分类名称");
+                    return;
+                }
+
+                $.ajax({
+                    url: "@Url.Action()",
+                    type: "post",
+                    dataType: "json",
+                    data: $("form").serialize(),
+                    success: function (d) {
+                        //关闭对话框
+                        window.parent.$.zui.closeModal();
+                    }
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-2">菜单名称</label>
+                        <div class="col-xs-9">
+                            @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", placeholder = "请输入网站名称" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2">所属分类</label>
+                        <div class="col-xs-9">
+                            @Html.Action("Index", "ClassList", new { TableName = "NewsClass", selectedValue = Model.ParentID })
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-2 col-xs-offset-2">
+                            <input type="hidden" name="CID" value="@Model.ClassID" />
+                            <button type="button" class="btn btn-default btn-primary">编辑</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- zui js -->
+    <script src="~/Areas/Admin/Content/dist/js/zui.js"></script>
+    <!-- app js -->
+    <script src="~/Areas/Admin/Content/js/app.js"></script>
+</body>
+</html>
