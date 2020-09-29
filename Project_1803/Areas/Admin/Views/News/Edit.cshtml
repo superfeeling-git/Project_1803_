@@ -62,34 +62,16 @@
                 format: "yyyy-mm-dd"
             });
 
-            $('#myUploader').uploader({
-                autoUpload: false,            // 当选择文件后立即自动进行上传操作
-                url: '@Url.Action("UploadFile")',  // 文件上传提交地址
-                limitFilesCount: 1,
-                multipart_params: {
-                    oldName: "@Model.NewsImg"
-                },
-                filters: {
-                    // 只允许上传图片或图标（.ico）
-                    mime_types: [
-                        { title: '图片', extensions: 'jpg,gif,png' },
-                        { title: '图标', extensions: 'ico' }
-                    ],
-                    // 最大上传文件为 1MB
-                    max_file_size: '1mb',
-                    // 不允许上传重复文件
-                    prevent_duplicates: true
-                },
-                onFileUploaded: function (file, responseObject) {
-                    var jsonObj = JSON.parse(responseObject.response);
+            uploaderSetting.onFileUploaded = function (file, responseObject) {
+                var jsonObj = JSON.parse(responseObject.response);
+                $("#NewsImg").val(jsonObj.url);
+            };
 
-                    $("#NewsImg").val(jsonObj.url);
+            uploaderSetting.multipart_params = {
+                oldName: "@Model.NewsImg"
+            };
 
-                    console.log(jsonObj.url);
-                    console.log(file);
-                }
-            });
-
+            $('#myUploader').uploader(uploaderSetting);
 
             KindEditor.ready(function (K) {
                 window.editor = K.create('#Content', {

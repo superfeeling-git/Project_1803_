@@ -15,6 +15,18 @@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script type="text/javascript">
+        $(function () {
+            var colors = ["red", "blue", "green"];
+            colors.filter(function (o, i) {
+                return o != "blue";
+            })
+
+
+            //colors.splice($.inArray("red", colors),1);
+            colors.forEach(function (i, e) {
+                console.log(i);
+            })
+        })
     </script>
 </head>
 <body>
@@ -57,7 +69,7 @@
                     <div class="form-group">
                         <label class="col-lg-1">所属分类</label>
                         <div class="col-lg-10">
-                            @Html.Action("Index", "NewsClassList")
+                            
                         </div>
                     </div>
                     <div class="form-group">

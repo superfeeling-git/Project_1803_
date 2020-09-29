@@ -24,5 +24,10 @@ namespace Project.MODEL
                 _ClassName = value;
             }
         }
+
+        public string LinkUrl { get; set; }
+        public int? ItemType { get; set; }
+        public string Content { get; set; }
+        public string ItemImg { get; set; }
     }
 }

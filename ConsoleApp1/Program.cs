@@ -12,30 +12,37 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //string names = File.ReadAllText($"{Path.GetFullPath("../../")}/b.txt");
+            //string[] names = File.ReadAllLines($"{Path.GetFullPath("../../")}/c.txt");
 
-            //names = Regex.Replace(names, @"\s+", ",").Trim(',');
+            ////names = Regex.Replace(names, @"\s+", ",").Trim(',');
 
-            //string _names = "胡燕青	赵磊	陈贵菁	李一帆	张恒瑞	李东懋	卢洋	王航	户鹏	刘海亮	任康	朱画宇	郝浩邑	张迎嵩	王天朔	李倩	王闻博	罗石磊	吴国星	褚琪	常乐	孙文东	赵汪洋	岳子阳	相云飞	张建亮	宋治兵 	张鼎瑞	张崔	杨文龙";
+            //string[] _names = @"卢洋洋；张少宇；张磊；张耀伟；王明港；刘洁；张旭东；于汪洋；马铭春；宋燚；张权旺；聂一博；杜庆丽；李琰；贺世贸；李明瑞；袁畅恒；曹一鸣；方琪；刘洋；伊卓；任俊丞；周杰；段文杰；赵振阳；李世恒；王铭；龚靖翔；卢雪悦".Split('；');
 
-            //_names = Regex.Replace(_names, @"\s", ",").Trim(',');
+            ////_names = Regex.Replace(_names, @"\s", ",").Trim(',');
 
-
-
-            //foreach (var item in names.Split(','))
+            //foreach (var item in names)
             //{
-            //    if(!_names.Split(',').Any(m => m == item))
+            //    if (!_names.Any(m => m == item))
             //    {
             //        Console.WriteLine(item);
             //    }
             //}
 
-            //Console.WriteLine(names.Split(',').Length);
+            ////Console.WriteLine(names.Split(',').Length);
 
-            ////Console.WriteLine(names);
-            //Console.Read();
+            //////Console.WriteLine(names);
+            ////Console.Read();
 
-            Console.WriteLine(typeof(Student).Name);
+            //Console.WriteLine(typeof(Student).Name);
+
+            Random random = new Random(unchecked((int)DateTime.Now.Ticks));
+
+            for (int i = 0; i < 50; i++)
+            {
+                Console.WriteLine(random.Next(100, 1000));
+            }
+
+
             Console.Read();
         }
     }

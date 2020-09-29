@@ -13,6 +13,8 @@ namespace Project.BLL
 {
     public class NewsClassBLL
     {
+        private NewsClassDAL dal = new NewsClassDAL();
+
         private BaseClassBLL<NewsClassModel> bll = new BaseClassBLL<NewsClassModel>();
 
         /// <summary>
@@ -20,9 +22,11 @@ namespace Project.BLL
         /// </summary>
         /// <param name="Model"></param>
         /// <returns></returns>
-        public int Add(NewsClassModel Model)
+        public bool Add(NewsClassModel Model)
         {
-            return bll.Add(Model);
+            Model.ClassID = bll.Add(Model);
+
+            return dal.Update(Model);
         }
 
         /// <summary>
@@ -32,7 +36,8 @@ namespace Project.BLL
         /// <returns></returns>
         public bool Update(NewsClassModel Model)
         {
-            return bll.Update(Model);
+            bll.Update(Model);
+            return dal.Update(Model);
         }
 
         /// <summary>

@@ -132,6 +132,7 @@
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysClassController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UploadFileController.cs" />
     <Compile Include="Auth\CustomerAuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1552,6 +1553,7 @@
     <Content Include="Areas\Admin\Content\dist\lib\kindeditor\plugins.zip" />
     <Content Include="Areas\Admin\Views\News\List.cshtml" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsClass\Test.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1599,6 +1601,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\UploadFile\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

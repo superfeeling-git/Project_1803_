@@ -16,16 +16,16 @@
     <script src="~/Areas/Admin/Content/js/Common.js"></script>
     <script type="text/javascript">
         $(function () {
-            function test() {
-                //关闭弹窗
-                //刷新页面。。
+            @if(!string.IsNullOrWhiteSpace(Request.QueryString["info"]))
+            {
+                @:ShowMsg("@Request.QueryString["info"]");
             }
 
             $(".add").click(function () {
                 $.zui.modalTrigger.show({
                     iframe: "@Url.Action("Create")",
                     width: $(window).width() * 0.6,
-                    height: 320,
+                    height: 580,
                     title:"添加分类",
                     hidden: function () {
                         ShowMsg("添加分类成功");
@@ -40,7 +40,7 @@
                 $.zui.modalTrigger.show({
                     iframe: "@Url.Action("Edit")?id=" + obj.data("id"),
                     width: $(window).width() * 0.6,
-                    height: 320,
+                    height: 580,
                     title:"编辑分类",
                     hidden: function () {
                         ShowMsg("编辑分类成功");
@@ -55,7 +55,7 @@
                 $.zui.modalTrigger.show({
                     iframe: "@Url.Action("Create")/" + obj.data("id"),
                     width: $(window).width() * 0.6,
-                    height: 320,
+                    height: 580,
                     title:"添加子分类",
                     hidden: function () {
                         ShowMsg("添加子分类成功");
@@ -87,7 +87,9 @@
                             <th width="5%">
                                 分类ID
                             </th>
-                            <th width="30%">分类名称</th>
+                            <th>分类名称</th>
+                            <th>内容模型</th>
+                            <th>栏目链接</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -112,6 +114,18 @@
                                     }
                                 }
                             </td>
+                            <td>@{
+                                var itemtype = (ViewBag.itemtype as IList<ItemType>).FirstOrDefault(m => m.TypeId == item.ItemType);
+                                if(itemtype == null)
+                                {
+                                    @:-
+                                }
+                                else
+                                {
+                                    @itemtype.TypeName
+                                }
+                            } </td>
+                            <td>@item.LinkUrl</td>
                             <td>
                                 <a href="javascript:;" data-id="@item.ClassID" class="btn btn-xs btn-primary edit">编辑</a>
                                 <a href="@Url.Action("Delete",new { id = item.ClassID })" class="btn btn-xs btn-danger delete">删除</a>

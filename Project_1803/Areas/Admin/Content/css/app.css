@@ -1303,3 +1303,5 @@ fieldset[disabled] .checkbox-custom label {
 table.list {
     margin-top: 1em;
 }
+
+.uploader{margin-bottom:0;}

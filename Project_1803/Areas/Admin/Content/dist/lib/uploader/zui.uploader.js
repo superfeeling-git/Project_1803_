@@ -145,6 +145,7 @@ o.files=[],n.each(e,function(e){o.files.push(new t(a.uid,e))})},999),a.shimExec.
 
     // The uploader modal class
     var Uploader = function(element, options) {
+
         var that = this;
         that.name = NAME;
         that.$ = $(element).addClass('uploader');
@@ -236,9 +237,12 @@ o.files=[],n.each(e,function(e){o.files.push(new t(a.uid,e))})},999),a.shimExec.
         // Bind events
         $this.on('click.' + NAME, '.uploader-btn-start', function(e) {
             that.start();
-        }).on('click.' + NAME, '.uploader-btn-browse', function(e) {
-            if($(this).is(that.$button)) return;
+        }).on('click.' + NAME, '.uploader-btn-browse', function (e) {
+            if ($(this).is(that.$button)) return;
+            console.log("abcdddd");
             that.$button.trigger('click');
+            
+
         }).on('click.' + NAME, '.uploader-btn-stop', function(e) {
             that.stop();
         });
