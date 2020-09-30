@@ -38,14 +38,45 @@
                 format: "yyyy-mm-dd"
             });
 
-
-            var files = [];
+            var files = [@Html.Raw(Model.PhotoImg)];
 
             uploaderSetting.limitFilesCount = false;
 
             uploaderSetting.onFileUploaded = function (file, responseObject) {
                 var jsonObj = JSON.parse(responseObject.response);
                 files.push(jsonObj.url);
+            };
+
+            uploaderSetting.fileIconCreator = function (fileType, file, uploader) {
+                return '<div class="file-icon-image" style="background-image: url(' + file.url + ')">';
+            };
+
+            uploaderSetting.staticFiles = [
+                @foreach (var item in Model.Files)
+                {
+                    <text>
+                        { name: '@item.name', size: @(item.size), url: '@(item.url)' },
+                    </text>
+                }
+            ];
+
+            uploaderSetting.deleteActionOnDone = function (file, doRemoveFile) {
+                /*
+                $.ajax({
+                    url: "",
+                    type: "",
+                    dataType: "json",
+                    data: {},
+                    success: function (d) {
+
+                    }
+                })
+                */
+
+                console.log(file);
+
+
+                doRemoveFile();
             };
 
             $('#myUploader').uploader(uploaderSetting);
@@ -65,7 +96,9 @@
     <div class="container-fluid">
         <div class="panel">
             <div class="panel-heading">
-                <div class="panel-title">图片添加</div>
+                <div class="panel-title">
+                    图片添加
+                </div>
             </div>
             <div class="panel-body">
                 <form method="post" action="@Url.Action("Create")" class="form-horizontal">
@@ -79,7 +112,7 @@
                     <div class="form-group">
                         <label class="col-lg-1">所属分类</label>
                         <div class="col-lg-10">
-                            @Html.Action("Index", "ClassList", new { TableName = "NewsClass", FirstValue = "", FirstText = "请选择" })
+                            @Html.Action("Index", "ClassList", new { TableName = "NewsClass", FirstValue = "", FirstText = "请选择",selectedValue = Model.ClassID })
                             @Html.ValidationMessageFor(m => m.ClassID)
                         </div>
                     </div>
@@ -95,7 +128,7 @@
                         <label class="col-lg-1">是否首页</label>
                         <div class="col-lg-10">
                             <div class="switch">
-                                <input type="checkbox" value="True" name="IsHome" id="IsHome">
+                                <input type="checkbox" @Html.Raw(Model.IsHome ? "checked=\"checked\"" : "") value="@Model.IsHome.ToString()" name="IsHome" id="IsHome">
                                 <label>&nbsp;</label>
                             </div>
                         </div>

@@ -1556,6 +1556,9 @@
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NewsClass\Test.cshtml" />
     <Content Include="Areas\Admin\Views\Photo\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Photo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Photo\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Photo\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

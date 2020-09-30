@@ -1,0 +1,22 @@
+﻿@model PageModel<PhotoModel>
+
+@foreach (var item in Model.PageData)
+{
+    <tr>
+        <td align="center"><input type="checkbox" value="@item.PhotoID" id="PhotoID" name="PhotoID" /></td>
+        <td>@item.ClassName</td>
+        <td>@item.PhotoName</td>
+        <td>@item.AddTime</td>
+        <td><a href="@item.PhotoImg" target="_blank">查看图片</a></td>
+        <td>@Html.Raw(item.IsHome ? "是" : "否")</td>
+        <td>
+            <a href="@Url.Action("Edit",new { id = item.PhotoID })">编辑</a>
+            <a href="javascript:;" id="@item.PhotoID" class="delete">删除</a>
+        </td>
+    </tr>
+}
+
+<script type="text/javascript">
+    var TotalCount = @Model.TotalCount;
+    var PageSize = @Model.PageSize;
+</script>

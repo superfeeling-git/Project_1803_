@@ -16,5 +16,7 @@ namespace Project.MODEL
         public string PhotoImg { get; set; }
         public bool IsHome { get; set; }
         public string Pictures { get; set; }
+        public string ClassName { get; set; }
+        public List<FileModel> Files { get; set; }
     }
 }
