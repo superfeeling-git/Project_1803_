@@ -64,6 +64,7 @@
     <Compile Include="NewsClassModel.cs" />
     <Compile Include="NewsModel.cs" />
     <Compile Include="PageModel.cs" />
+    <Compile Include="PhotoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleAdminModel.cs" />
     <Compile Include="RoleModel.cs" />

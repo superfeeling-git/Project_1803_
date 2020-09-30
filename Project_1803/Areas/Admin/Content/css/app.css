@@ -1305,3 +1305,7 @@ table.list {
 }
 
 .uploader{margin-bottom:0;}
+
+.input-group-btn {
+    left: -1px;
+}

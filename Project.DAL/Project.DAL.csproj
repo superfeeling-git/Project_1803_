@@ -46,6 +46,7 @@
     <Compile Include="BaseClassDAL.cs" />
     <Compile Include="NewsClassDAL.cs" />
     <Compile Include="NewsDAL.cs" />
+    <Compile Include="PhotoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleAdminDAL.cs" />
     <Compile Include="RoleDAL.cs" />

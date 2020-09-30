@@ -76,7 +76,7 @@ namespace Project_1803.Auth
         {
             base.HandleUnauthorizedRequest(filterContext);
 
-            RedirectResult redirect = new RedirectResult("/Admin/Error/Index");
+            RedirectResult redirect = new RedirectResult("/Admin/Login");
 
             filterContext.Result = redirect;
         }

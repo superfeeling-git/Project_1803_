@@ -67,7 +67,7 @@ namespace Project_1803.Areas.Admin.Controllers
             }
 
             //上传文件的完整路径
-            string SaveFileName = $"{SavePath}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{extName}";
+            string SaveFileName = $"{SavePath}/{DateTime.Now.ToString("yyyyMMddHHmmss_fff")}{extName}";
 
             //保存文件的路径
             string SaveFilePath = Server.MapPath(SaveFileName);
