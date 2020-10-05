@@ -51,7 +51,18 @@ namespace Project_1803.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(PhotoModel Model)
         {
-            throw new NotImplementedException();
+            bll.Update(Model);
+            return RedirectToAction("Index", new { info = "编辑成功" });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(string idList)
+        {
+            return Json($"删除{bll.DeletePhoto(idList)}条成功", JsonRequestBehavior.AllowGet);
         }
     }
 }

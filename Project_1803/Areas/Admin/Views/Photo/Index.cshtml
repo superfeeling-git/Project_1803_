@@ -15,6 +15,13 @@
     <script src="~/Areas/Admin/Content/js/Common.js"></script>
     <script type="text/javascript">
         $(function () {
+            @{ var info = Request.QueryString["info"];}
+            @if (!string.IsNullOrWhiteSpace(info))
+            {
+                @:ShowMsg("@info");
+            }
+
+
             getData();
 
             //监听页面事件

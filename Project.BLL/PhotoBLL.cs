@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Web;
+using static System.IO.File;
 
 namespace Project.BLL
 {
@@ -62,10 +63,21 @@ namespace Project.BLL
                 FileModel fileModel = new FileModel();
                 //文件名
                 fileModel.name = item.Split('/').Last();
-                //文件信息
-                FileInfo info = new FileInfo(HttpContext.Current.Server.MapPath(item));
-                //文件大小
-                fileModel.size = info.Length;
+
+                try
+                {
+                    //文件信息
+                    FileInfo info = new FileInfo(HttpContext.Current.Server.MapPath(item));
+                    //文件大小
+                    fileModel.size = info.Length;
+                }
+                catch (Exception)
+                {
+                    fileModel.size = 0;                    
+                }               
+
+
+
                 //文件路径
                 fileModel.url = item;
 
@@ -78,6 +90,49 @@ namespace Project.BLL
             Model.PhotoImg = string.Join(",", files.Select(m => "\"" + m + "\""));
 
             return Model;
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <returns></returns>
+        public bool Update(PhotoModel Model)
+        {
+            if (!string.IsNullOrWhiteSpace(Model.PhotoImg))
+            {
+                string[] p = Model.PhotoImg.Split(',');
+
+                Model.PhotoImg = p.First();
+
+                Model.Pictures = string.Join(",", p.Where(m => m != Model.PhotoImg));
+            }
+
+            return dal.Update(Model);
+        }
+
+        HttpContext httpContext = HttpContext.Current;
+
+        /// <summary>
+        /// 删除图片
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DeletePhoto(string idList)
+        {
+            //删除文件
+            string[] paths = dal.getPhotoForPath(idList);
+
+            foreach (var item in paths)
+            {
+                foreach (var path in item.Split(','))
+                {
+                    if (File.Exists(httpContext.Server.MapPath(path)))
+                        File.Delete(httpContext.Server.MapPath(path));
+                }
+            }
+
+            return dal.DeletePhoto(idList);
         }
     }
 }

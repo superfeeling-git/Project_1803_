@@ -18,5 +18,6 @@ namespace Project.MODEL
         public string Pictures { get; set; }
         public string ClassName { get; set; }
         public List<FileModel> Files { get; set; }
+        public string imgName { get; set; }
     }
 }

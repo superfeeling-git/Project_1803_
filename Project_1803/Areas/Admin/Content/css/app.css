@@ -1297,7 +1297,7 @@ fieldset[disabled] .checkbox-custom label {
     }
 
     .search select, .search input {
-        width: 113px;
+        width: 169px;
     }
 
 table.list {
@@ -1309,3 +1309,4 @@ table.list {
 .input-group-btn {
     left: -1px;
 }
+

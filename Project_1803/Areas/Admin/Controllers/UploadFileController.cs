@@ -97,5 +97,19 @@ namespace Project_1803.Areas.Admin.Controllers
                 url = SaveFileName        // 文件的下载地址
             }, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 删除文件
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DeleteFile(string path)
+        {
+            if(System.IO.File.Exists(Server.MapPath(path)))
+            {
+                System.IO.File.Delete(Server.MapPath(path));
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }
