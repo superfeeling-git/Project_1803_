@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        // 获取图片真实高度
+        function getImageWidth(url, callback) {
+            var img = new Image();
+            img.src = url;
+            // 如果图片被缓存，则直接返回缓存数据
+            if (img.complete) {
+                callback(img.width, img.height);
+            } else {
+                img.onload = function () {
+                    callback(img.width, img.height);
+                }
+            }
+        }
+
+        $(function () {
+            getImageWidth("https://localhost:44344/Content/images/banner02.jpg", function (w, h) {
+                console.log(w);
+                console.log(h);
+            })
+        })
+    </script>
+</head>
+<body>
+    <img src="https://localhost:44344/Content/images/banner02.jpg"  width="30"/>
+</body>
+</html>

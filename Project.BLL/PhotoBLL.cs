@@ -16,7 +16,6 @@ namespace Project.BLL
     {
         PhotoDAL dal = new PhotoDAL();
 
-
         public bool Add(PhotoModel Model)
         {
 
@@ -46,6 +45,17 @@ namespace Project.BLL
         }
 
         /// <summary>
+        /// 根据不同的分类ID获取相应的图片
+        /// </summary>
+        /// <param name="ClassId"></param>
+        /// <param name="Top"></param>
+        /// <returns></returns>
+        public IEnumerable<PhotoModel> getTopPhoto(int ClassId)
+        {
+            return dal.getTopPhoto(ClassId);
+        }
+
+        /// <summary>
         /// 获取单条实体
         /// </summary>
         /// <param name="id"></param>
@@ -56,7 +66,14 @@ namespace Project.BLL
 
             List<FileModel> fileList = new List<FileModel>();
 
-            List<string> files = $"{Model.PhotoImg},{Model.Pictures}".Split(',').ToList();
+            //List<string> files = $"{Model.PhotoImg},{Model.Pictures}".Split(',').ToList();
+
+            List<string> files = new List<string> { Model.PhotoImg };
+
+            if(!string.IsNullOrWhiteSpace(Model.Pictures))
+            {
+                files.AddRange(Model.Pictures.Split(','));
+            }
 
             foreach (var item in files)
             {

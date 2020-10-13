@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国中医药研究促进会慢性病专项基金管理委员会-首页</title>
+    @Styles.Render("~/Content/style")
+    @Scripts.Render("~/bundles/home")
+    <script type="text/javascript">
+        $(function () {
+            $("div.nav ul li:last").css("border", "none");
+            $("ul.projectlist li:nth-child(2n)").css("margin", "0");
+        });
+    </script>
+</head>
+
+<body>
+    @Html.Partial("Top")
+    <div class="innerbanner"><div><img src="images/banner_about.jpg" /></div></div>
+    <div class="nav">
+        <h1>机构概况</h1>
+        <ul>
+            <li class="current"><a href="#">机构概况</a></li>
+            <li><a href="#">组织机构</a></li>
+            <li><a href="#">机构章程</a></li>
+            <li><a href="#">机构文化</a></li>
+            <li><a href="#">在线留言</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
+    </div>
+    <div class="pagebody clearfix">
+        <div class="left">
+            <div class="intro">
+                <h6>灾害救助</h6>
+                <div>灾害救助是壹基金的核心业务领域。壹基金在自然灾害的灾前、灾中、灾后的三个阶段开展防灾减灾、备灾救灾、安置重建三方面的工作，对中国常规多发的中小型洪涝、地震、凝冻、干旱等灾害和突发重大灾害进行持续的人道主义赈灾行动，使灾区儿童及弱势群体重获有保障、有尊严的生活。同时通过支持民间公益组织、学术机构开展项目，提升灾害应对与管理能力，有效促进行业发展，完善政府相关政策。</div>
+                <h6>紧急救灾计划</h6>
+                <div>搭建由民间专业救援队、灾害管理机构和相关企业等联合组成和共同参与的三大伙伴网络，分别为“壹基金救援联盟”、“壹基金联合救灾”和“企业联合救灾平台”。壹基金采取“提前备灾、联合行动、快速救援”的策略，通过建设属地化社会力量灾害应急机制，以当地民间和专业的力量为主，分别针对重大灾害和中小型灾害，主要面向儿童及其他弱势群体开展紧急救援和赈灾行动，同时推动民间救灾力量的发展，促进民间公益组织参与灾害治理体系的建设。2011-2014年期</div>
+                <h6>防灾减灾计划</h6>
+                <div>以儿童为主要目标群体，以减灾教育为主要内容，通过支持民间救援队、公益组织、教育机构等社会力量，进入社区和学校开展“抗震减灾示范校园”、“减灾小课堂”、“人人来减灾”三个方面的活动，有效提升灾害多发地区儿童应对灾害及日常安全风险的能力，维护儿童的安全</div>
+                <div><img src="images/about.jpg" /></div>
+            </div>
+        </div>
+        @Html.Action("Index", "Common")
+    </div>
+    @Html.Partial("Foot")
+</body>
+</html>

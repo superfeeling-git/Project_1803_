@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Project.MODEL;
 using Project.DAL;
+using System.Web;
 
 namespace Project.BLL
 {
@@ -37,6 +38,19 @@ namespace Project.BLL
         public PageModel<NewsModel> getList(string Title, int ClassId, int PageIndex, int PageSize = 10)
         {
             return dal.getList(Title, ClassId, PageIndex, PageSize);
+        }
+
+        /// <summary>
+        /// 获取前*条数据
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="ClassId"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public IEnumerable<NewsModel> getTopNews(int ClassId,int Top)
+        {
+            return dal.getTopNews(ClassId, Top);
         }
 
         /// <summary>

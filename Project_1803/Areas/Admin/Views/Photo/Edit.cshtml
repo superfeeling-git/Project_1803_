@@ -58,9 +58,12 @@
             uploaderSetting.staticFiles = [
                 @foreach (var item in Model.Files)
                 {
+                    if(!string.IsNullOrWhiteSpace(item.name))
+                    { 
                     <text>
                         { name: '@item.name', size: @(item.size), url: '@(item.url)' },
                     </text>
+                    }
                 }
             ];
 
@@ -135,7 +138,7 @@
                         <label class="col-lg-1">是否首页</label>
                         <div class="col-lg-10">
                             <div class="switch">
-                                <input type="checkbox" @Html.Raw(Model.IsHome ? "checked=\"checked\"" : "") value="@Model.IsHome.ToString()" name="IsHome" id="IsHome">
+                                <input type="checkbox" @Html.Raw(Model.IsHome ? "checked=\"checked\"" : "") value="True" name="IsHome" id="IsHome">
                                 <label>&nbsp;</label>
                             </div>
                         </div>

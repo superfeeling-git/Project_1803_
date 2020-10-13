@@ -82,6 +82,24 @@ namespace Project.DAL
         }
 
         /// <summary>
+        /// 根据不同的分类ID获取前TOP条内容
+        /// </summary>
+        /// <param name="ClassId"></param>
+        /// <param name="Top"></param>
+        /// <returns></returns>
+        public IEnumerable<NewsModel> getTopNews(int ClassId, int Top)
+        {
+            string sql = $@"SELECT TOP {Top} NewsID,ClassID,Title,TitleColor,AddTime,NewsImg,IsLink,LinkUrl,IsHome,Content
+                         FROM News WHERE ClassID IN
+                         (
+                         SELECT ClassID FROM NewsClass WHERE ParentPath + ',' LIKE '%,{ClassId},%' OR ClassID = @ClassID
+                         ) AND IsHome = 1
+                         ORDER BY AddTime DESC";
+
+            return DbHelper.GetList<NewsModel>(sql, new SqlParameter("@ClassID", ClassId));
+        }
+
+        /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="idList"></param>

@@ -38,6 +38,22 @@ namespace Project.DAL
         }
 
         /// <summary>
+        /// 根据不同的分类ID获取前TOP条内容
+        /// </summary>
+        /// <param name="ClassId"></param>
+        /// <param name="Top"></param>
+        /// <returns></returns>
+        public IEnumerable<PhotoModel> getTopPhoto(int ClassId)
+        {
+            string sql = $@"SELECT * FROM Photo WHERE ClassID IN
+                            (
+                            SELECT ClassID FROM NewsClass WHERE ParentPath + ',' LIKE '%,{ClassId},%' OR ClassID = @ClassID
+                            )
+                             AND IsHome = 1 ORDER BY PhotoID DESC";
+            return DbHelper.GetList<PhotoModel>(sql, new SqlParameter("@ClassID", ClassId));
+        }
+
+        /// <summary>
         /// 返回图片分页记录
         /// </summary>
         /// <param name="Title"></param>

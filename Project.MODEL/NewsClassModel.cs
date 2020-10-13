@@ -29,5 +29,7 @@ namespace Project.MODEL
         public int? ItemType { get; set; }
         public string Content { get; set; }
         public string ItemImg { get; set; }
+        public IEnumerable<NewsModel> NewsList { get; set; }
+        public IEnumerable<PhotoModel> PhotoList { get; set; }
     }
 }

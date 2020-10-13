@@ -1,0 +1,19 @@
+﻿@{ IEnumerable<NewsClassModel> List = (new NewsClassBLL()).GetNewsClass(); }
+<div class="foot clearfix">
+    <div class="sitemap">
+        @foreach (var item in List.Where(m => m.ParentID == 0))
+        {
+            <ul>
+                <li><h1><a href="@item.LinkUrl.getUrl(item.ClassID,item.ItemType)">@item.ClassName</a></h1></li>
+                @foreach (var cate in List.Where(m => m.ParentID == item.ClassID))
+                {
+                    <li><a href="@item.LinkUrl.getUrl(item.ClassID,item.ItemType)" title="@cate.ClassName">@cate.ClassName.breakString(10)</a></li>
+                }
+            </ul>
+        }
+    </div>
+    <div class="erm"><img src="/images/erm.gif" /></div>
+</div>
+<div class="copyright">
+    版权所有  中国中医药研究促进会慢性病专项基金管理委员会<br />京ICP备12043486号  京公网安备11010102001751号
+</div>

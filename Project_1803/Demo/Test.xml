@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+<?xml-stylesheet type="text/css" href="Test.css" ?>			<!- - CSS 样式 -->
+<?xml-stylesheet type="text/xsl" href="Test.xsl" ?>
+<!-- XSL 样式 -->
+<!--
+<!DOCTYPE DEMO SYSTEM "test.dtd">							<!- - 引用外部 DTD 文档 -->
+<!DOCTYPE DEMO [
+	<!ELEMENT DEMO (EMAIL*)*>
+	<!ELEMENT EMAIL (TO, FROM, CC*, SUBJECT, BODY)>
+	<!ELEMENT TO (#PCDATA)>
+	<!ATTLIST TO
+		title ID #IMPLIED
+	>
+	<!ELEMENT FROM (#PCDATA)>
+	<!ELEMENT CC (#PCDATA)>
+	<!ELEMENT SUBJECT (#PCDATA)>
+	<!ELEMENT BODY (#PCDATA)>
+]>
+<!-- XML 文档内定义 DTD 类型定义 -->
+<DEMO>
+	<EMAIL>
+		<TO title="ToJodie">Jodie</TO>
+		<FROM>Bill</FROM>
+		<CC>Philip</CC>
+		<SUBJECT>My first XML document</SUBJECT>
+		<BODY><![CDATA[<? ?>]]>
+		Hello, XML!
+---------------------------------------------------------------------------------------
+		XSL	:	Extensible Stylesheet Language	可延伸样式语言
+		DTD	:	Document Type Definition		文件类型定义
+---------------------------------------------------------------------------------------
+		CSS	:	Cascading Style Sheet		串接样式表	
+---------------------------------------------------------------------------------------
+		XML  宣   告:	定义必须使用小写字母
+		文件类型宣告:	对特定的文件类型指示文法规则或文件类型宣告(DTD)等
+---------------------------------------------------------------------------------------
+		<![CDATA[
+		<? xml version="1.0" ?>
+		<xml>
+			xml text
+		</xml>
+		]]></BODY>
+	</EMAIL>
+	<EMAIL>
+		<TO title="ToTom">Tom</TO>
+		<FROM>Jack</FROM>
+		<CC>Sam</CC>
+		<CC>Lily</CC>
+		<SUBJECT>My second XML document</SUBJECT>
+		<BODY>
+		Hello Tom!
+	</BODY>
+	</EMAIL>
+</DEMO>
+<!--
+——————————————————————————————————————————————————————————————————————————
+	* XML 声明 常用属性： version、encoding
+	* XML 文档区分大小写
+	* 注释不能出现在 XML 声明之前，也不能出现在一个标记之中，注释内容不能连续出现两个 - 号
+	* 属性是由“=”分割开的名称值对；属性值必须用引号引起来，如果值本身包含双引号，就应使用单引号；同一标记不能有相同名称的多个属性；一般在使用属性前首先要定义属性，这个工作将在 DTD 文档类型定义中进行
+	* 通用实体引用：以“&”开始以“;”结束，	1、&lt;		<	；参数实体引用：以“%”开始以“；”结束，在DTD节中自定义；
+												2、&gt;		>	
+												3、&amp;	&
+												4、&apos;	'
+												5、&quot;	"
+	* CDATA 节中包含的内容按原样显示,以“<![CDATA[”开始以“]]>”关闭。
+——————————————————————————————————————————————————————————————————————————
+DTD 文档
+	* DTD 是为 XML 文档规定了一套专用的规则
+	* DTD 文档类型定义位于 XML 声明与文档体之间，XML 声明与 DTD 全称为XML 文档的序言
+	* DTD 由“<!DOCTYPE name[”开始，其中 name 是文档名称，以“]>”结束
+——————————————————————————————————————————————————————————————————————————
+XML 相关标准
+	1、 W3C 建议
+		* SAX			Simple API for XML						XML简单应用程序接口
+		* DOM			Document Object Model					文档对象模型
+		* DTD			Document Type Definition				文档类型定义
+		* RDF			Resource Description Framework			资源描述框架
+		* XSLT			XSL Transformations						XSL 转换
+
+	2、 Xpath XML 路径语言
+		* RDF Schema	RDF Schema								RDF 大纲
+		* XHTML			Extensible HyperText Markup Language	扩展超文本标记语言
+
+	3、 W3C Drafts 工作草案
+		* XSL			Extensible Stylesheet Language			扩展样式语言
+		* XLL			XML Link Language						XML 链接语言
+				1、XLink											处理 XML 文档间链接
+				2、XPointer											使用一个文档或文档段的 ID （标识符）指向它
+		* XML Schema	XML Schema								XML 大纲
+
+	4、 W3C Notes 注释
+		* DDML/Xschema	Document Definition Markup Language/XSchema		文档定义标记语言/XSchema
+		* DCD			Documetn Content Description					文档内容描述
+		* SOX			Schema for Object-oriented XML					面向对象 XML 大纲
+——————————————————————————————————————————————————————————————————————————
+	* CSS 定义样式只能显示元素的内容部分
+	* XSL 定义的样式可以显示元素的内容,还可以显示属性部分;XSL 分两部分:变换部分和格式化部分
+		1、变换部分可以让用户定义标记，可以用标准的 HTML 标记来代替他的 XML 标记;
+		2、格式化部分则提供一个强有力的功能，能将用户文档当成一页页的网页,可以设置网页外观和版面配置
+-->

@@ -54,6 +54,7 @@ namespace Project_1803.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(NewsModel Model)
         {
             bll.Update(Model);

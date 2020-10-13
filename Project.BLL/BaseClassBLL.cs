@@ -7,6 +7,7 @@ using Project.MODEL;
 using Project.DAL;
 using Project.Common;
 using System.Reflection;
+using System.Web;
 
 namespace Project.BLL
 {
@@ -16,10 +17,25 @@ namespace Project.BLL
         private IList<T> ClassList = new List<T>();
         private IList<T> allList;
 
+        private string TableName = typeof(T).Name.Replace("Model", "");
+
         public BaseClassBLL()
         {
-            dal = new BaseClassDAL(typeof(T).Name.Replace("Model", ""));
-            this.allList = dal.GetClassList<T>();
+            dal = new BaseClassDAL(TableName);
+
+            IList<T> list = new List<T>();
+
+            if(HttpRuntime.Cache[TableName] != null)
+            {
+                list = HttpRuntime.Cache[TableName] as List<T>;
+            }
+            else
+            {
+                list = dal.GetClassList<T>();
+                HttpRuntime.Cache[TableName] = list;
+            }
+
+            this.allList = list;
         }
 
         /// <summary>
@@ -38,6 +54,8 @@ namespace Project.BLL
         /// <returns></returns>
         public int Add(BaseClassModel Model)
         {
+            HttpRuntime.Cache.Remove(TableName);
+
             //顶级分类
             if (Model.ClassID == 0)
             {
@@ -54,7 +72,10 @@ namespace Project.BLL
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
             }
 
-            return dal.Add(Model);
+            int row = dal.Add(Model);
+
+
+            return row;
         }
 
         /// <summary>
@@ -78,11 +99,17 @@ namespace Project.BLL
                 Model.ParentID = Model.ClassID;
                 Model.Depth = parentModel.Depth + 1;
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
+                //对子分类的处理
+
             }
             Model.ClassID = Model.CID;
 
 
-            return dal.Update(Model);
+            bool result = dal.Update(Model);
+
+            HttpRuntime.Cache.Remove(TableName);
+
+            return result;
         }
 
         /// <summary>
@@ -99,6 +126,7 @@ namespace Project.BLL
             else
             {
                 dal.DeleteByID(id);
+                HttpRuntime.Cache.Remove(TableName);
                 return new ResultInfo { ErrorCode = 0, Msg = "删除成功" };
             }
         }

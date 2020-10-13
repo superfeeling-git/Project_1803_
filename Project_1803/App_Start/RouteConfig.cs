@@ -14,9 +14,18 @@ namespace Project_1803
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "item",
+                url: "{controller}/{rootid}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new { rootid = @"[\d]+" },
+                new string[] { "Project_1803.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new string[] { "Project_1803.Controllers" }
             );
         }
     }

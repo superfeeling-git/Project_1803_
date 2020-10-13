@@ -1,0 +1,17 @@
+.profile .select_ui,.profile [type=date],.profile [type=password],.profile [type=tel],.profile [type=text],.profile textarea{outline:0;border:1px solid #ccc;-webkit-border-radius:2px;border-radius:2px;font-size:12px}
+.profile .select_text_ui,.profile [type=date],.profile [type=password],.profile [type=tel],.profile [type=text],.profile textarea{background:#fff;-webkit-box-shadow:0 1px 2px 0 #f0f0f0 inset;box-shadow:0 1px 2px 0 #f0f0f0 inset}
+.profile .btn_mid_pink,.profile .select_ui,.profile button,.profile input{vertical-align:middle;font-family:inherit}
+.profile [type=date],.profile [type=password],.profile [type=tel],.profile [type=text],.profile textarea{padding:5px}
+.profile [type=date]{padding-right:0}
+.profile [type=date],.profile [type=password],.profile [type=tel],.profile [type=text]{height:1.5em;line-height:1.5}
+.profile [type=text][disabled],.profile [type=text][readonly]{background:#f1f1f1}
+.profile select{font-size:12px}
+.profile .select_ui{position:relative;float:none;display:inline-block;margin:0;width:auto;height:auto;border:1px solid #ccc;background:#f2f2f2;background:-webkit-gradient(linear,left top,left bottom,from(#fcfcfc),to(#f2f2f2));background:-webkit-linear-gradient(top,#fcfcfc,#f2f2f2);background:-moz-linear-gradient(top,#fcfcfc,#f2f2f2);background:-o-linear-gradient(top,#fcfcfc,#f2f2f2);background:linear-gradient(to bottom,#fcfcfc,#f2f2f2);text-align:left;white-space:nowrap;line-height:1.5;filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#fffcfcfc, endColorStr=#fff2f2f2);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.profile .select_focus_ui{background:#fcfcfc;background:-webkit-gradient(linear,left top,left bottom,from(#f2f2f2),to(#fcfcfc));background:-webkit-linear-gradient(top,#f2f2f2,#fcfcfc);background:-moz-linear-gradient(top,#f2f2f2,#fcfcfc);background:-o-linear-gradient(top,#f2f2f2,#fcfcfc);background:linear-gradient(to bottom,#f2f2f2,#fcfcfc);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#fff2f2f2, endColorStr=#fffcfcfc)}
+.select_ui .select_text_ui{display:block;overflow:visible;margin-right:26px;padding:5px 3px 5px 6px;border-right:1px solid #e5e5e5;background:#fff;vertical-align:baseline}
+.select_ui select{position:absolute;top:0;bottom:0;left:0;-moz-box-sizing:content-box;box-sizing:content-box;margin:-1px;padding:1px;height:100%;min-width:100%;border:inherit;border:0;background:#fff;color:inherit;font:inherit;opacity:0;-ms-box-sizing:content-box;filter:alpha(opacity=0)}
+.profile .select_arrow{position:absolute;top:50%;right:7px;overflow:hidden;margin-top:-2px;width:0;height:0;border-color:#b7b7b7 transparent;border-style:solid;border-width:5px 5px 0;border-top-color:inherit}
+.select_ui:hover .select_arrow{border-top-color:#9e9e9e}
+.profile .select_focus_ui .select_arrow{border-top-color:inherit}
+.profile .select_menu_ui{position:absolute;top:100%;left:0;overflow:hidden;margin:1px -1px;padding:0;min-width:100%;border:1px outset #ccc;background:#fff;list-style:none;vertical-align:baseline;white-space:nowrap;line-height:1.5;cursor:default}
+.profile .select_focus_ui,.profile [type=date]:focus,.profile [type=password]:focus,.profile [type=tel]:focus,.profile [type=text]:focus,.profile textarea:focus{border-color:#8ec52b}

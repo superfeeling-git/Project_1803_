@@ -1,0 +1,13 @@
+﻿@{ IEnumerable<NewsClassModel> List = (new NewsClassBLL()).GetNewsClass(); }
+<div class="top">
+    <div class="logo"><a href="/"><img src="/images/logo.jpg" alt="中国中医药研究促进会慢性病专项基金管理委员会" title="中国中医药研究促进会慢性病专项基金管理委员会" /></a></div>
+    <div class="floatright">
+        <a href="javascript:void(0)" class="wx"><i></i>官方微信</a><a href="javascript:void(0)" class="wb"><i></i>官方微博</a>
+    </div>
+</div>
+<div class="menu">
+    @foreach (var item in List.Where(m => m.ParentID == 0))
+    {
+        <a href="@item.LinkUrl.getUrl(item.ClassID,item.ItemType)">@item.ClassName</a>
+    }
+</div>
