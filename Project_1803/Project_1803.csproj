@@ -146,6 +146,7 @@
     <Compile Include="Areas\Admin\Controllers\UploadFileController.cs" />
     <Compile Include="Auth\CustomerAuthorizeAttribute.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -1489,6 +1490,7 @@
     <Content Include="kindeditor\themes\simple\simple.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="error.html" />
     <Content Include="unfind.html" />
     <Content Include="zui-admin\component-checkbox-radio.html" />
     <Content Include="zui-admin\component-step.html" />
@@ -1988,6 +1990,7 @@
     <Content Include="Views\Common\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Common\SubNav.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
