@@ -30,9 +30,10 @@
                 window.editor = K.create('#Content', {
                     uploadJson: '/kindeditor/asp.net/upload_json.ashx',
                     fileManagerJson: '/kindeditor/asp.net/file_manager_json.ashx',
+                    //cssPath:"/Content/css/style.css",
                     allowFileManager: true,
                     items: [
-                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                         'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                         'insertunorderedlist', '|', 'emoticons', 'image', 'link']
                 });

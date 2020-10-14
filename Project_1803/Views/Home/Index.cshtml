@@ -125,9 +125,9 @@
             @foreach (var pic in item.NewsList.Where(m => !string.IsNullOrWhiteSpace(m.NewsImg)).Take(1))
             {
                 <dl class="imgnews clearfix">
-                    <dt><a href="#"><img src="@pic.NewsImg" /></a></dt>
+                    <dt><a href="@pic.LinkUrl.getUrl(pic.NewsID)"><img src="@pic.NewsImg" /></a></dt>
                     <dd>
-                        <h2><a href="#" style="color:@pic.TitleColor" title="@pic.Title">@pic.Title.breakString(30)</a></h2>
+                        <h2><a href="@pic.LinkUrl.getUrl(pic.NewsID)" style="color:@pic.TitleColor" title="@pic.Title">@pic.Title.breakString(30)</a></h2>
                         <div>@pic.Content</div>
                     </dd>
                 </dl>
@@ -136,7 +136,7 @@
             <ul class="subnews">
                 @foreach (var news in item.NewsList)
                 {
-                    <li><i></i><span>@news.AddTime.ToString("yyyy-MM-dd")</span><a href="#" style="color:@news.TitleColor">@news.Title</a></li>
+                    <li><i></i><span>@news.AddTime.ToString("yyyy-MM-dd")</span><a href="@news.LinkUrl.getUrl(news.NewsID)" style="color:@news.TitleColor">@news.Title</a></li>
                 }
             </ul>
         </div>
@@ -196,9 +196,9 @@
             @foreach (var pic in Model.NewsClass.Last().NewsList.Where(m => !string.IsNullOrWhiteSpace(m.NewsImg)))
             {
                 <dl class="imgnews clearfix">
-                    <dt><a href="#"><img src="@pic.NewsImg" /></a></dt>
+                    <dt><a href="@pic.LinkUrl.getUrl(pic.NewsID)"><img src="@pic.NewsImg" /></a></dt>
                     <dd>
-                        <h2><a href="#" style="color:@pic.TitleColor" title="@pic.Title">@pic.Title.breakString(30)</a></h2>
+                        <h2><a href="@pic.LinkUrl.getUrl(pic.NewsID)" style="color:@pic.TitleColor" title="@pic.Title">@pic.Title.breakString(30)</a></h2>
                         <div>@pic.Content</div>
                     </dd>
                 </dl>
@@ -207,7 +207,7 @@
         <ul class="subnews block1">
             @foreach (var news in Model.NewsClass.Last().NewsList)
             {
-                <li><i></i><span>@news.AddTime.ToString("yyyy-MM-dd")</span><a href="#" style="color:@news.TitleColor">@news.Title</a></li>
+                <li><i></i><span>@news.AddTime.ToString("yyyy-MM-dd")</span><a href="@news.LinkUrl.getUrl(news.NewsID)" style="color:@news.TitleColor">@news.Title</a></li>
             }
         </ul>
         </div>

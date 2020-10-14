@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Project.BLL;
 using Project.MODEL;
 using HtmlAgilityPack;
+using Project.Common;
 
 namespace Project_1803.Controllers
 {
@@ -38,14 +39,7 @@ namespace Project_1803.Controllers
                 foreach (var news in item.NewsList)
                 {
                     //新闻内容
-                    var html = news.Content;
-
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    html = htmlDoc.DocumentNode.InnerText;
-
-                    news.Content = html.Substring(0, html.Length > 65 ? 65 : html.Length);
+                    news.Content = news.Content.breakTitle(65);
                 }
             }
             #endregion

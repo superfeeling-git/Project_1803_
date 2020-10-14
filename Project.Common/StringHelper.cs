@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -60,6 +61,48 @@ namespace Project.Common
             }
         }
 
+        /// <summary>
+        /// 根据LinkUrl生成指定的链接
+        /// </summary>
+        /// <param name="LinkUrl"></param>
+        /// <returns></returns>
+        public static string getUrl(this string LinkUrl, object RootId, int ClassId, int? ItemType)
+        {
+            if (string.IsNullOrWhiteSpace(LinkUrl))
+            {
+                if (ItemType == 1)
+                {
+                    return $"/item/{RootId}/{ClassId}";
+                }
+                else if (ItemType == 2)
+                {
+                    return $"/news/{RootId}/{ClassId}";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            else
+            {
+                return LinkUrl.Replace("{id}", ClassId.ToString());
+            }
+        }
+
+        /// <summary>
+        /// 根据新闻ID和链接生成URL
+        /// </summary>
+        /// <param name="LinkUrl"></param>
+        /// <param name="NewsId"></param>
+        /// <returns></returns>
+        public static string getUrl(this string LinkUrl, int NewsId)
+        {
+            if (string.IsNullOrWhiteSpace(LinkUrl))
+                return $"News/View/{NewsId}";
+            else
+                return LinkUrl;
+        }
+
         #region//Asc:将ASCII码改成字符编码
         /// <summary>
         ///将ASCII码改成字符编码
@@ -73,6 +116,17 @@ namespace Project.Common
         #endregion
 
         #region breakString:获取指定长度的字符，一个中文算两个字符．
+        public static string breakTitle(this string str, int strLen)
+        {
+            var htmlDoc = new HtmlDocument();
+
+            htmlDoc.LoadHtml(str);
+
+            str = htmlDoc.DocumentNode.InnerText;
+
+            return str.Substring(0, str.Length > strLen ? strLen : str.Length);
+        }
+
         /// <summary>
         /// 获取指定长度的字符，一个中文算两个字符．
         /// </summary>

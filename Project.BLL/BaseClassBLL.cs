@@ -148,6 +148,7 @@ namespace Project.BLL
         /// <returns></returns>
         public IList<T> GetClass()
         {
+            ClassList = new List<T>();
             foreach (var item in allList.Where(m => getPropertyValue("Depth", m) == 0))
             {
                 ClassList.Add(item);

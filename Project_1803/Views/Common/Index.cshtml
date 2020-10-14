@@ -12,21 +12,12 @@
         <h1>公益项目</h1><a href="#">更多></a>
     </div>
     <ul class="projectlist clearfix">
-        <li>
-            <div><a href="#"><img src="images/temp/temp5.jpg" /></a></div>
-            <h6><a href="#">爱心大使1</a></h6>
-        </li>
-        <li>
-            <div><a href="#"><img src="images/temp/temp5.jpg" /></a></div>
-            <h6><a href="#">爱心大使1</a></h6>
-        </li>
-        <li>
-            <div><a href="#"><img src="images/temp/temp5.jpg" /></a></div>
-            <h6><a href="#">爱心大使1</a></h6>
-        </li>
-        <li>
-            <div><a href="#"><img src="images/temp/temp5.jpg" /></a></div>
-            <h6><a href="#">爱心大使1</a></h6>
-        </li>
+        @foreach (var item in ViewBag.project as IEnumerable<NewsClassModel>)
+        {
+            <li>
+                <div><a href="#"><img src="@item.ItemImg" /></a></div>
+                <h6><a href="#">@item.ClassName.breakString(10)</a></h6>
+            </li>
+        }
     </ul>
 </div>

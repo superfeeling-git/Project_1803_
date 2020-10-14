@@ -1,0 +1,44 @@
+﻿@model PagedList.StaticPagedList<NewsModel>
+@using PagedList
+@using PagedList.Mvc
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国中医药研究促进会慢性病专项基金管理委员会-首页</title>
+    @Styles.Render("~/Content/style")
+    @Scripts.Render("~/bundles/home")
+    <script type="text/javascript">
+        $(function () {
+            $("div.nav ul li:last").css("border", "none");
+            $("ul.projectlist li:nth-child(2n)").css("margin", "0");
+        });
+    </script>
+</head>
+
+<body>
+    @Html.Partial("Top")
+    @Html.Action("SubNav", "Common")
+    <div class="pagebody clearfix">
+        <div class="left">
+            @{NewsModel news = ViewBag.news as NewsModel;}
+            <dl class="imgnews clearfix">
+                <dt><a href="@news.LinkUrl.getUrl(news.NewsID)"><img src="@news.NewsImg" /></a></dt>
+                <dd>
+                    <h2><a href="@news.LinkUrl.getUrl(news.NewsID)" style="color:@news.TitleColor">@news.Title</a></h2>
+                    <div>@news.Content.breakTitle(65)</div>
+                </dd>
+            </dl>
+            <ul class="newslist">
+                @foreach (var item in Model)
+                {
+                    <li><i></i><span>@item.AddTime.ToString("yyyy-MM-dd")</span><a href="@item.LinkUrl.getUrl(item.NewsID)" style="color:@item.TitleColor">@item.Title</a></li>
+                }
+            </ul>
+            @Html.PagedListPager(Model, m => Url.Action("Index", new { PageIndex = m }))
+        </div>
+        @Html.Action("Index", "Common")
+    </div>
+    @Html.Partial("Foot")
+</body>
+</html>

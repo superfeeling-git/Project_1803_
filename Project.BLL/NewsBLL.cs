@@ -54,6 +54,19 @@ namespace Project.BLL
         }
 
         /// <summary>
+        /// 获取前*条数据
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="ClassId"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public IEnumerable<NewsModel> getTopNews(int ClassId, int Top, bool IsHome = false)
+        {
+            return dal.getTopNews(ClassId, Top, IsHome);
+        }
+
+        /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="idList"></param>

@@ -1,0 +1,12 @@
+﻿<div class="innerbanner"><div><img src="@ViewBag.banner" /></div></div>
+<div class="nav">
+    <h1>@Model.ClassName</h1>
+    <ul>
+        @foreach (var item in ViewBag.List as IList<NewsClassModel>)
+        {
+            <li @Html.Raw(item.ClassID == Model.ClassID ? "class=\"current\"" : "")>
+                <a href="@item.LinkUrl.getUrl(ViewContext.RouteData.Values["rootid"],item.ClassID,item.ItemType)">@item.ClassName</a>
+            </li>
+        }
+    </ul>
+</div>
