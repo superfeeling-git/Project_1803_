@@ -133,6 +133,7 @@ namespace Project.DAL
             return DbHelper.GetModel<NewsModel>("SELECT * FROM News WHERE NewsID = @NewsID", new SqlParameter("@NewsID", id));
         }
 
+
         /// <summary>
         /// 更新新闻
         /// </summary>

@@ -5,7 +5,7 @@
     <ul class="newslist">
         @foreach (var news in ViewBag.newsList as IEnumerable<NewsModel>)
         {
-            <li><a href="#" style="color:@news.TitleColor" target="_blank">@news.Title</a></li>
+            <li><a href="@news.LinkUrl.getUrl(news.NewsID)" style="color:@news.TitleColor" target="_blank">@news.Title</a></li>
         }
     </ul>
     <div class="righttitle">

@@ -17,6 +17,7 @@ namespace Project_1803.Controllers
         // GET: Common
         public ActionResult Index()
         {
+            
             ViewBag.newsList = newsBLL.getTopNews(5, 6, false);
             ViewBag.project = newsClassBLL.GetNewsClass().Where(m => m.ParentID == 37);
             return View();
@@ -26,7 +27,39 @@ namespace Project_1803.Controllers
         {
             NewsClassBLL newsClassBLL = new NewsClassBLL();
 
-            int rootid = Convert.ToInt32(ControllerContext.RouteData.Values["rootid"]);
+            int rootid;
+
+            object _rootid = ControllerContext.RouteData.Values["rootid"];
+
+            if(_rootid == null)
+            {
+                //控制器名称
+                string ControllerName = ControllerContext.ParentActionViewContext.RouteData.Values["controller"].ToString().ToLower();
+
+                //Action名称
+                String ActionName = ControllerContext.ParentActionViewContext.RouteData.Values["action"].ToString().ToLower();
+
+                if (ControllerName == "news" && ActionName == "view")
+                {
+                    //1、找到当前新闻对应的分类ID
+                    var newsid = Convert.ToInt32(ControllerContext.RouteData.Values["id"]);
+
+                    var classid = newsBLL.getModel(newsid).ClassID;
+
+                    var parentPath = newsClassBLL.getNewsClassById(classid).ParentPath;
+
+                    //2、根据找到的分类ID获取根ID
+                    rootid = Convert.ToInt32(parentPath.Split(',')[1]);                   
+                }
+                else
+                { 
+                    rootid = 0;
+                }
+            }
+            else
+            {
+                rootid = Convert.ToInt32(_rootid);
+            }
 
             ViewBag.banner = newsClassBLL.GetNewsClass().First(m => m.ClassID == rootid).ItemImg;
 

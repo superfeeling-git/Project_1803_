@@ -98,7 +98,7 @@ namespace Project.Common
         public static string getUrl(this string LinkUrl, int NewsId)
         {
             if (string.IsNullOrWhiteSpace(LinkUrl))
-                return $"News/View/{NewsId}";
+                return $"/News/View/{NewsId}";
             else
                 return LinkUrl;
         }

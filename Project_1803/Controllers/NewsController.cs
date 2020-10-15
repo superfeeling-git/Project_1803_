@@ -12,13 +12,13 @@ namespace Project_1803.Controllers
 {
     public class NewsController : Controller
     {
+        NewsClassBLL newsClassBLL = new NewsClassBLL();
+
+        NewsBLL newsBLL = new NewsBLL();
+
         // GET: News
         public ActionResult Index(int PageIndex = 1)
         {
-            NewsClassBLL newsClassBLL = new NewsClassBLL();
-
-            NewsBLL newsBLL = new NewsBLL();
-
             int rootid = Convert.ToInt32(ControllerContext.RouteData.Values["rootid"]);
 
             var id = ControllerContext.RouteData.Values["id"];
@@ -37,6 +37,12 @@ namespace Project_1803.Controllers
             var page = new StaticPagedList<NewsModel>(pageData.PageData, PageIndex, pageData.PageSize, pageData.TotalCount);
 
             return View(page);
+        }
+
+        public ActionResult View(int id)
+        {
+
+            return View(newsBLL.getModel(id));
         }
     }
 }
