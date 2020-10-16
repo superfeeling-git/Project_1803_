@@ -66,7 +66,7 @@ namespace Project.Common
         /// </summary>
         /// <param name="LinkUrl"></param>
         /// <returns></returns>
-        public static string getUrl(this string LinkUrl, object RootId, int ClassId, int? ItemType)
+        public static string getUrl(this string LinkUrl, object RootId, int ClassId, int? ItemType, string ControllerName)
         {
             if (string.IsNullOrWhiteSpace(LinkUrl))
             {
@@ -77,6 +77,10 @@ namespace Project.Common
                 else if (ItemType == 2)
                 {
                     return $"/news/{RootId}/{ClassId}";
+                }
+                else if(!string.IsNullOrWhiteSpace(ControllerName))
+                {
+                    return $"/{ControllerName}/{RootId}/{ClassId}";
                 }
                 else
                 {

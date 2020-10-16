@@ -145,11 +145,13 @@
     <Compile Include="Areas\Admin\Controllers\SysClassController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFileController.cs" />
     <Compile Include="Auth\CustomerAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AmbassadorController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1000,7 +1002,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\jquery.ad-gallery.css" />
+    <Content Include="Content\css\style.od-gallery.css" />
     <Content Include="Content\css\jumei_usercenter.min.css" />
     <Content Include="Content\css\style.PagedList.css" />
     <Content Include="Content\css\style.lightbox.css" />
@@ -1059,7 +1061,7 @@
     <Content Include="Content\js\passwordStrength-min.js" />
     <Content Include="Content\js\PCASClass.js" />
     <Content Include="Content\js\Validform_v5.3.2_min.js" />
-    <Content Include="Content\js\zzsc.js" />
+    <Content Include="Content\js\jquery.zzsc.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Demo\Test.css" />
     <Content Include="Demo\Test.htm" />
@@ -1992,6 +1994,11 @@
     <Content Include="Views\Common\SubNav.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\News\View.cshtml" />
+    <Content Include="Views\Ambassador\Index.cshtml" />
+    <Content Include="Views\Ambassador\View.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\View.cshtml" />
+    <Content Include="Views\Project\News.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

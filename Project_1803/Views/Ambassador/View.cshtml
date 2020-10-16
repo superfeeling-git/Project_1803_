@@ -1,0 +1,53 @@
+﻿@model PhotoModel
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国中医药研究促进会慢性病专项基金管理委员会-首页</title>
+    @Styles.Render("~/Content/style")
+    @Scripts.Render("~/bundles/home")
+    <script type="text/javascript">
+        $(function () {
+            $("div.nav ul li:last").css("border", "none");
+        });
+    </script>
+</head>
+
+<body>
+    @Html.Partial("Top")
+    @Html.Action("SubNav", "Common")
+    <div class="pagebody clearfix">
+        <h1 class="ambassadorname">@Model.PhotoName</h1>
+        <div id="gallery" class="ad-gallery">
+            <div class="ad-image-wrapper">
+            </div>
+            <div class="ad-controls">
+            </div>
+            <div class="ad_warp">
+                <div class="ad-nav">
+                    <div class="ad-thumbs">
+                        <ul class="ad-thumb-list">
+                            @foreach (var item in Model.Pictures.Split(','))
+                            {
+                                <li>
+                                    <a href="@item">
+                                        <img src="@item" class="image0">
+                                    </a>
+                                </li>
+                            }
+                        </ul/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <p>刘大成，1978年出生在山东省济宁市任城区安居街道办事处南刘村的一个普通的农民家庭。他自幼喜欢唱歌唱戏，因为家庭条件不富裕，没能进入到专业的院校学习，但他并没有因此而放弃自己的音乐梦想，自学乐理、声乐知识，乐器买不起，就自己动手做，树叶、塑料管、梳子在他的改造下，都变成了独一无二的刘氏乐器。从“天天听”到“天天唱”，并走上中央电视台《星光大道》的舞台，一步一步地赢得周冠军、月冠军、年度总冠军。</p>
+            <p>
+                2010年，一次偶然的机会，有人建议他参加为大众提供才艺展示机会的中央电视台《星光大道》栏目，刘大成抱着试试看的态度就报名参加了，没想到竟然一步步拿下周冠军、月冠军，走到了2010年度总决赛的舞台。在舞台上，农民出身的刘大成用质朴无华打动了观众，用歌声唱出了农家人的生活情感。他的口技表演《农家的早晨》、《在希望的田野上》，在欢快的伴奏声中，鸟儿欢叫着从他嘴中飞来，二胡优美的旋律也从他嘴中飞出。<br />
+                刘大成被荣任为2012年“春耕行动”形象大使。“春耕行动”是CCTV-7农业频
+            </p>
+        </div>
+    </div>
+    @Html.Partial("Foot")
+</body>
+</html>
