@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a9e5061c192c4ac78927efb33153af79" Name="Diagram1">
+        <EntityTypeShape EntityType="erp_testModel.Admin" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.Product" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.ProductClass" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.ProductProperty" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.Property" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.Shopping" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.ShoppingAudit" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.ShoppingProduct" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.Storage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.StorageLocation" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.StorageRegion" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.StorageType" Width="1.5" PointX="1.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.Supplier" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.SupplierClass" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.V_ProductList" Width="1.5" PointX="7.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.v_shop_product" Width="1.5" PointX="9.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.v_shopping" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.V_Storage_List" Width="1.5" PointX="11.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.V_StorageLocation_List" Width="1.5" PointX="11.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.V_StorageRegion_List" Width="1.5" PointX="11.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="erp_testModel.V_StorageType_List" Width="1.5" PointX="7.75" PointY="15" IsExpanded="true" />
+        <AssociationConnector Association="erp_testModel.FK_Product_REFERENCE_ProductClass" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_ProductProperty_REFERENCE_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_ShoppingProduct_REFERENCE_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_SupplierClass_REFERENCE_ProductClass" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_ProductProperty_REFERENCE_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_Shopping_REFERENCE_Storage" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_Shopping_REFERENCE_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_ShoppingAudit_REFERENCE_Shopping" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_ShoppingProduct_REFERENCE_Shopping" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_Storage_REFERENCE_StorageType" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_StorageRegion_REFERENCE_Storage" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_StorageLocation_REFERENCE_StorageRegion" ManuallyRouted="false" />
+        <AssociationConnector Association="erp_testModel.FK_SupplierClass_REFERENCE_Supplier" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

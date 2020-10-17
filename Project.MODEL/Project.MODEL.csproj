@@ -62,6 +62,7 @@
     <Compile Include="BaseClassModel.cs" />
     <Compile Include="FileModel.cs" />
     <Compile Include="HomeModel.cs" />
+    <Compile Include="IModelBase.cs" />
     <Compile Include="ItemType.cs" />
     <Compile Include="NewsClassModel.cs" />
     <Compile Include="NewsModel.cs" />

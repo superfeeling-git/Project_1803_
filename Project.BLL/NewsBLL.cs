@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Project.BLL
 {
-    public class NewsBLL
+    public class NewsBLL : IBLLBase
     {
         NewsDAL dal = new NewsDAL();
 
@@ -94,6 +94,11 @@ namespace Project.BLL
         public bool Update(NewsModel Model)
         {
             return dal.Update(Model);
+        }
+
+        public IModelBase getClassID(int id)
+        {
+            return getModel(id);
         }
     }
 }

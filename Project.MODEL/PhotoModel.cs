@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.MODEL
 {
-    public class PhotoModel
+    public class PhotoModel : IModelBase
     {
         public int PhotoID { get; set; }
         public int ClassID { get; set; }

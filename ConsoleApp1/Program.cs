@@ -13,15 +13,17 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var html = @"https://localhost:44344/Home/Index";
+            //var html = @"https://localhost:44344/Home/Index";
 
-            HtmlWeb web = new HtmlWeb();
+            //HtmlWeb web = new HtmlWeb();
 
-            var htmlDoc = web.Load(html);
+            //var htmlDoc = web.Load(html);
 
-            HtmlNode node = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='link']");
+            //HtmlNode node = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='link']");
 
-            Console.WriteLine(node.InnerText);
+            //Console.WriteLine(node.InnerText);
+
+            erp_testEntities db = new erp_testEntities();
 
             Console.ReadLine();
         }

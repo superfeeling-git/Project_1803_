@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Activation;
 
 namespace Project.MODEL
 {
-    public class NewsModel
+    public class NewsModel : IModelBase
     {
         public int NewsID { get; set; }
         /// <summary>

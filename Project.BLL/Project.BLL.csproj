@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AdminBLL.cs" />
     <Compile Include="BaseClassBLL.cs" />
+    <Compile Include="IBLLBase.cs" />
     <Compile Include="NewsBLL.cs" />
     <Compile Include="NewsClassBLL.cs" />
     <Compile Include="PhotoBLL.cs" />

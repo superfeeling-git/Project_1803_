@@ -5,20 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using Project.BLL;
 using Project.MODEL;
+using System.Reflection;
 
 namespace Project_1803.Controllers
 {
     public class CommonController : Controller
     {
-        NewsBLL newsBLL = new NewsBLL();
-
-        PhotoBLL photoBLL = new PhotoBLL();
 
         NewsClassBLL newsClassBLL = new NewsClassBLL();
+
 
         // GET: Common
         public ActionResult Index()
         {
+            NewsBLL newsBLL = new NewsBLL();
             ViewBag.newsList = newsBLL.getTopNews(5, 6, false);
             ViewBag.project = newsClassBLL.GetNewsClass().Where(m => m.ParentID == 37);
             return View();
@@ -45,41 +45,21 @@ namespace Project_1803.Controllers
                 //1、找到当前新闻对应的分类ID
                 var newsid = Convert.ToInt32(ControllerContext.RouteData.Values["id"]);
 
-                id = newsBLL.getModel(newsid).ClassID;
+                //程序集路径
+                string AssemblyPath = "Project.BLL";
+
+                //类的名称
+                string AssemblyName = (ControllerName == "news" && ActionName == "view") ? "News" : "Photo";
+
+                //反射创建对象
+                IBLLBase bll = (IBLLBase)Assembly.Load(AssemblyPath).CreateInstance($"{AssemblyPath}.{AssemblyName}BLL");
+
+                id = bll.getClassID(Convert.ToInt32(id)).ClassID;
 
                 var parentPath = newsClassBLL.getNewsClassById(Convert.ToInt32(id)).ParentPath;
 
-                rootid = Convert.ToInt32(parentPath.Split(',')[1]);
-
                 //2、根据找到的分类ID获取根ID
                 rootid = Convert.ToInt32(parentPath.Split(',')[1]);
-
-                /*
-                if (ControllerName == "news" && ActionName == "view")
-                {
-                    //1、找到当前新闻对应的分类ID
-                    var newsid = Convert.ToInt32(ControllerContext.RouteData.Values["id"]);
-
-                    id = newsBLL.getModel(newsid).ClassID;
-
-                    var parentPath = newsClassBLL.getNewsClassById(Convert.ToInt32(id)).ParentPath;
-
-                    //2、根据找到的分类ID获取根ID
-                    rootid = Convert.ToInt32(parentPath.Split(',')[1]);
-                }
-                else if (ControllerName == "ambassador" && ActionName == "view")
-                {
-                    //1、找到当前图片对应的分类ID
-                    var newsid = Convert.ToInt32(ControllerContext.RouteData.Values["id"]);
-
-                    id = photoBLL.getModel(newsid).ClassID;
-
-                    var parentPath = newsClassBLL.getNewsClassById(Convert.ToInt32(id)).ParentPath;
-
-                    //2、根据找到的分类ID获取根ID
-                    rootid = Convert.ToInt32(parentPath.Split(',')[1]);
-                }
-                */
             }
 
             ViewBag.banner = newsClassBLL.GetNewsClass().First(m => m.ClassID == rootid).ItemImg;

@@ -1,0 +1,1842 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="erp_testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="LoginIP" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="BrandID" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BuyPrice" Type="money" />
+          <Property Name="SalePrice" Type="money" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="Spec" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductClass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="ClassOrder" Type="int" />
+          <Property Name="Depth" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PropertyID" Type="int" />
+          <Property Name="PropertyValue" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Shopping">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+          </Key>
+          <Property Name="ShoppingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="StorageId" Type="int" />
+          <Property Name="ShoppingCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShoppingType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeTo" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="State" Type="tinyint" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="TotalMoney" Type="money" />
+        </EntityType>
+        <EntityType Name="ShoppingAudit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShoppingID" Type="int" />
+          <Property Name="AuditResult" Type="tinyint" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminID" Type="int" />
+        </EntityType>
+        <EntityType Name="ShoppingProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShoppingID" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="BuyCount" Type="int" />
+          <Property Name="BuyPrice" Type="money" />
+          <Property Name="IsGive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="StorageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="StorageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="StorageLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="StorageLocation">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="MaxVol" Type="int" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="StorageRegion">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StorageId" Type="int" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="StorageType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="LastEditTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="TEL" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierState" Type="bit" />
+          <Property Name="PayType" Type="int" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Contract" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplierClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.V_ProductList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_ProductList">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttributeValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Spec" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="BrandID" Type="int" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SalePrice" Type="money" />
+          <Property Name="BuyPrice" Type="money" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.v_shop_product”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_shop_product">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ShoppingID" Type="int" Nullable="false" />
+          <Property Name="BuyCount" Type="int" />
+          <Property Name="OrderPrice" Type="money" />
+          <Property Name="IsGive" Type="bit" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttributeValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Spec" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="BrandID" Type="int" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SalePrice" Type="money" />
+          <Property Name="BuyPrice" Type="money" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.v_shopping”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_shopping">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+          </Key>
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShoppingID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="StorageId" Type="int" />
+          <Property Name="ShoppingCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShoppingType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeTo" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="State" Type="tinyint" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="TotalMoney" Type="money" />
+          <Property Name="PayType" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="TEL" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.V_Storage_List”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_Storage_List">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="StorageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="StorageLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.V_StorageLocation_List”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_StorageLocation_List">
+          <Key>
+            <PropertyRef Name="LocationID" />
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="MaxVol" Type="int" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="StorageId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.V_StorageRegion_List”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_StorageRegion_List">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="StorageId" Type="int" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="TypeId" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“erp_test.dbo.V_StorageType_List”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_StorageType_List">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="LastEditTime" Type="datetime" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Product_REFERENCE_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductProperty_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductProperty" Type="Self.ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductProperty">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductProperty_REFERENCE_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="0..1" />
+          <End Role="ProductProperty" Type="Self.ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="ProductProperty">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="Shopping">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_REFERENCE_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="Shopping">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingAudit_REFERENCE_Shopping">
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="0..1" />
+          <End Role="ShoppingAudit" Type="Self.ShoppingAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shopping">
+              <PropertyRef Name="ShoppingID" />
+            </Principal>
+            <Dependent Role="ShoppingAudit">
+              <PropertyRef Name="ShoppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingProduct_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ShoppingProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingProduct_REFERENCE_Shopping">
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="1" />
+          <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shopping">
+              <PropertyRef Name="ShoppingID" />
+            </Principal>
+            <Dependent Role="ShoppingProduct">
+              <PropertyRef Name="ShoppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_REFERENCE_StorageType">
+          <End Role="StorageType" Type="Self.StorageType" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageLocation_REFERENCE_StorageRegion">
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="0..1" />
+          <End Role="StorageLocation" Type="Self.StorageLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageRegion">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="StorageLocation">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageRegion_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="StorageRegion">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierClass_REFERENCE_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="0..1" />
+          <End Role="SupplierClass" Type="Self.SupplierClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="SupplierClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierClass_REFERENCE_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierClass" Type="Self.SupplierClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="SupplierClass">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fun_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="depth" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fun_ProList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="price" Type="money" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ProductId" Type="int" Nullable="false" />
+                <Property Name="ClassID" Type="int" />
+                <Property Name="BrandID" Type="int" />
+                <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+                <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+                <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+                <Property Name="BuyPrice" Type="money" />
+                <Property Name="SalePrice" Type="money" />
+                <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+                <Property Name="Spec" Type="nvarchar" MaxLength="50" />
+                <Property Name="Detail" Type="nvarchar(max)" />
+                <Property Name="AddTime" Type="datetime" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="p_pagedlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="table" Type="nvarchar" Mode="In" />
+          <Parameter Name="where" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="KeyField" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShowField" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="p_PageList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="TypeCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="TypeName" Type="nvarchar" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="P_SupplierPage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="supplierName" Type="varchar" Mode="In" />
+          <Parameter Name="Contact" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="supplierState" Type="bit" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="tvpoints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="x" Type="float" />
+                <Property Name="y" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="up_pagedlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="table" Type="nvarchar" Mode="In" />
+          <Parameter Name="where" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="KeyField" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShowField" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="up_pagelist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="table" Type="nvarchar" Mode="In" />
+          <Parameter Name="where" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="KeyField" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShowField" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="erp_testModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductClass" EntityType="Self.ProductClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductProperty" EntityType="Self.ProductProperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shopping" EntityType="Self.Shopping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingAudit" EntityType="Self.ShoppingAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingProduct" EntityType="Self.ShoppingProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageLocation" EntityType="Self.StorageLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageRegion" EntityType="Self.StorageRegion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageType" EntityType="Self.StorageType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierClass" EntityType="Self.SupplierClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_ProductList" EntityType="Self.V_ProductList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ProductList].[ClassName] AS [ClassName], 
+    [V_ProductList].[PropertyName] AS [PropertyName], 
+    [V_ProductList].[AttributeValue] AS [AttributeValue], 
+    [V_ProductList].[BrandName] AS [BrandName], 
+    [V_ProductList].[ProductCode] AS [ProductCode], 
+    [V_ProductList].[ProductName] AS [ProductName], 
+    [V_ProductList].[Unit] AS [Unit], 
+    [V_ProductList].[BarCode] AS [BarCode], 
+    [V_ProductList].[Spec] AS [Spec], 
+    [V_ProductList].[ClassID] AS [ClassID], 
+    [V_ProductList].[BrandID] AS [BrandID], 
+    [V_ProductList].[ProductId] AS [ProductId], 
+    [V_ProductList].[SalePrice] AS [SalePrice], 
+    [V_ProductList].[BuyPrice] AS [BuyPrice]
+    FROM [dbo].[V_ProductList] AS [V_ProductList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_shop_product" EntityType="Self.v_shop_product" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_shop_product].[ShoppingID] AS [ShoppingID], 
+    [v_shop_product].[BuyCount] AS [BuyCount], 
+    [v_shop_product].[OrderPrice] AS [OrderPrice], 
+    [v_shop_product].[IsGive] AS [IsGive], 
+    [v_shop_product].[ClassName] AS [ClassName], 
+    [v_shop_product].[PropertyName] AS [PropertyName], 
+    [v_shop_product].[AttributeValue] AS [AttributeValue], 
+    [v_shop_product].[BrandName] AS [BrandName], 
+    [v_shop_product].[ProductCode] AS [ProductCode], 
+    [v_shop_product].[ProductName] AS [ProductName], 
+    [v_shop_product].[Unit] AS [Unit], 
+    [v_shop_product].[BarCode] AS [BarCode], 
+    [v_shop_product].[Spec] AS [Spec], 
+    [v_shop_product].[ClassID] AS [ClassID], 
+    [v_shop_product].[BrandID] AS [BrandID], 
+    [v_shop_product].[ProductId] AS [ProductId], 
+    [v_shop_product].[SalePrice] AS [SalePrice], 
+    [v_shop_product].[BuyPrice] AS [BuyPrice]
+    FROM [dbo].[v_shop_product] AS [v_shop_product]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_shopping" EntityType="Self.v_shopping" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_shopping].[SupplierName] AS [SupplierName], 
+    [v_shopping].[StorageName] AS [StorageName], 
+    [v_shopping].[ShoppingID] AS [ShoppingID], 
+    [v_shopping].[SupplierID] AS [SupplierID], 
+    [v_shopping].[StorageId] AS [StorageId], 
+    [v_shopping].[ShoppingCode] AS [ShoppingCode], 
+    [v_shopping].[ShoppingType] AS [ShoppingType], 
+    [v_shopping].[TimeTo] AS [TimeTo], 
+    [v_shopping].[Remark] AS [Remark], 
+    [v_shopping].[AddTime] AS [AddTime], 
+    [v_shopping].[State] AS [State], 
+    [v_shopping].[AdminId] AS [AdminId], 
+    [v_shopping].[TotalMoney] AS [TotalMoney], 
+    [v_shopping].[PayType] AS [PayType], 
+    [v_shopping].[UserName] AS [UserName], 
+    [v_shopping].[Contact] AS [Contact], 
+    [v_shopping].[TEL] AS [TEL], 
+    [v_shopping].[Address] AS [Address]
+    FROM [dbo].[v_shopping] AS [v_shopping]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Storage_List" EntityType="Self.V_Storage_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_Storage_List].[TypeName] AS [TypeName], 
+    [V_Storage_List].[UserName] AS [UserName], 
+    [V_Storage_List].[StorageId] AS [StorageId], 
+    [V_Storage_List].[TypeId] AS [TypeId], 
+    [V_Storage_List].[StorageName] AS [StorageName], 
+    [V_Storage_List].[StorageCode] AS [StorageCode], 
+    [V_Storage_List].[State] AS [State], 
+    [V_Storage_List].[StorageLocation] AS [StorageLocation], 
+    [V_Storage_List].[AddTime] AS [AddTime], 
+    [V_Storage_List].[AdminId] AS [AdminId], 
+    [V_Storage_List].[Province] AS [Province], 
+    [V_Storage_List].[City] AS [City], 
+    [V_Storage_List].[Area] AS [Area], 
+    [V_Storage_List].[Address] AS [Address]
+    FROM [dbo].[V_Storage_List] AS [V_Storage_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_StorageLocation_List" EntityType="Self.V_StorageLocation_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_StorageLocation_List].[UserName] AS [UserName], 
+    [V_StorageLocation_List].[RegionName] AS [RegionName], 
+    [V_StorageLocation_List].[StorageName] AS [StorageName], 
+    [V_StorageLocation_List].[LocationID] AS [LocationID], 
+    [V_StorageLocation_List].[RegionID] AS [RegionID], 
+    [V_StorageLocation_List].[LocationCode] AS [LocationCode], 
+    [V_StorageLocation_List].[LocationNum] AS [LocationNum], 
+    [V_StorageLocation_List].[State] AS [State], 
+    [V_StorageLocation_List].[MaxVol] AS [MaxVol], 
+    [V_StorageLocation_List].[AddTime] AS [AddTime], 
+    [V_StorageLocation_List].[AdminId] AS [AdminId], 
+    [V_StorageLocation_List].[StorageId] AS [StorageId]
+    FROM [dbo].[V_StorageLocation_List] AS [V_StorageLocation_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_StorageRegion_List" EntityType="Self.V_StorageRegion_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_StorageRegion_List].[TypeName] AS [TypeName], 
+    [V_StorageRegion_List].[StorageName] AS [StorageName], 
+    [V_StorageRegion_List].[UserName] AS [UserName], 
+    [V_StorageRegion_List].[RegionID] AS [RegionID], 
+    [V_StorageRegion_List].[StorageId] AS [StorageId], 
+    [V_StorageRegion_List].[RegionName] AS [RegionName], 
+    [V_StorageRegion_List].[RegionCode] AS [RegionCode], 
+    [V_StorageRegion_List].[State] AS [State], 
+    [V_StorageRegion_List].[AddTime] AS [AddTime], 
+    [V_StorageRegion_List].[AdminId] AS [AdminId], 
+    [V_StorageRegion_List].[TypeId] AS [TypeId]
+    FROM [dbo].[V_StorageRegion_List] AS [V_StorageRegion_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_StorageType_List" EntityType="Self.V_StorageType_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_StorageType_List].[UserName] AS [UserName], 
+    [V_StorageType_List].[TypeId] AS [TypeId], 
+    [V_StorageType_List].[TypeCode] AS [TypeCode], 
+    [V_StorageType_List].[TypeName] AS [TypeName], 
+    [V_StorageType_List].[Remark] AS [Remark], 
+    [V_StorageType_List].[LastEditTime] AS [LastEditTime], 
+    [V_StorageType_List].[AdminId] AS [AdminId]
+    FROM [dbo].[V_StorageType_List] AS [V_StorageType_List]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Product_REFERENCE_ProductClass" Association="Self.FK_Product_REFERENCE_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClass" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductProperty_REFERENCE_Product" Association="Self.FK_ProductProperty_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductProperty" EntitySet="ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductProperty_REFERENCE_Property" Association="Self.FK_ProductProperty_REFERENCE_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="ProductProperty" EntitySet="ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_REFERENCE_Storage" Association="Self.FK_Shopping_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Shopping" EntitySet="Shopping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_REFERENCE_Supplier" Association="Self.FK_Shopping_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Shopping" EntitySet="Shopping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingAudit_REFERENCE_Shopping" Association="Self.FK_ShoppingAudit_REFERENCE_Shopping">
+            <End Role="Shopping" EntitySet="Shopping" />
+            <End Role="ShoppingAudit" EntitySet="ShoppingAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingProduct_REFERENCE_Product" Association="Self.FK_ShoppingProduct_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingProduct_REFERENCE_Shopping" Association="Self.FK_ShoppingProduct_REFERENCE_Shopping">
+            <End Role="Shopping" EntitySet="Shopping" />
+            <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_REFERENCE_StorageType" Association="Self.FK_Storage_REFERENCE_StorageType">
+            <End Role="StorageType" EntitySet="StorageType" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageLocation_REFERENCE_StorageRegion" Association="Self.FK_StorageLocation_REFERENCE_StorageRegion">
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+            <End Role="StorageLocation" EntitySet="StorageLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageRegion_REFERENCE_Storage" Association="Self.FK_StorageRegion_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierClass_REFERENCE_ProductClass" Association="Self.FK_SupplierClass_REFERENCE_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClass" />
+            <End Role="SupplierClass" EntitySet="SupplierClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierClass_REFERENCE_Supplier" Association="Self.FK_SupplierClass_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierClass" EntitySet="SupplierClass" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="erp_testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fun_ProList_Result">
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="BrandID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" />
+        </ComplexType>
+        <ComplexType Name="tvpoints_Result">
+          <Property Name="x" Type="Double" />
+          <Property Name="y" Type="Double" />
+        </ComplexType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="BrandID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProductClass" Relationship="Self.FK_Product_REFERENCE_ProductClass" FromRole="Product" ToRole="ProductClass" />
+          <NavigationProperty Name="ProductProperty" Relationship="Self.FK_ProductProperty_REFERENCE_Product" FromRole="Product" ToRole="ProductProperty" />
+          <NavigationProperty Name="ShoppingProduct" Relationship="Self.FK_ShoppingProduct_REFERENCE_Product" FromRole="Product" ToRole="ShoppingProduct" />
+        </EntityType>
+        <EntityType Name="ProductClass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="ClassOrder" Type="Int32" />
+          <Property Name="Depth" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_REFERENCE_ProductClass" FromRole="ProductClass" ToRole="Product" />
+          <NavigationProperty Name="SupplierClass" Relationship="Self.FK_SupplierClass_REFERENCE_ProductClass" FromRole="ProductClass" ToRole="SupplierClass" />
+        </EntityType>
+        <EntityType Name="ProductProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PropertyID" Type="Int32" />
+          <Property Name="PropertyValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductProperty_REFERENCE_Product" FromRole="ProductProperty" ToRole="Product" />
+          <NavigationProperty Name="Property" Relationship="Self.FK_ProductProperty_REFERENCE_Property" FromRole="ProductProperty" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyOrder" Type="Int32" />
+          <NavigationProperty Name="ProductProperty" Relationship="Self.FK_ProductProperty_REFERENCE_Property" FromRole="Property" ToRole="ProductProperty" />
+        </EntityType>
+        <EntityType Name="Shopping">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+          </Key>
+          <Property Name="ShoppingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="StorageId" Type="Int32" />
+          <Property Name="ShoppingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShoppingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTo" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Byte" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Shopping_REFERENCE_Storage" FromRole="Shopping" ToRole="Storage" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Shopping_REFERENCE_Supplier" FromRole="Shopping" ToRole="Supplier" />
+          <NavigationProperty Name="ShoppingAudit" Relationship="Self.FK_ShoppingAudit_REFERENCE_Shopping" FromRole="Shopping" ToRole="ShoppingAudit" />
+          <NavigationProperty Name="ShoppingProduct" Relationship="Self.FK_ShoppingProduct_REFERENCE_Shopping" FromRole="Shopping" ToRole="ShoppingProduct" />
+        </EntityType>
+        <EntityType Name="ShoppingAudit">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShoppingID" Type="Int32" />
+          <Property Name="AuditResult" Type="Byte" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminID" Type="Int32" />
+          <NavigationProperty Name="Shopping" Relationship="Self.FK_ShoppingAudit_REFERENCE_Shopping" FromRole="ShoppingAudit" ToRole="Shopping" />
+        </EntityType>
+        <EntityType Name="ShoppingProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShoppingID" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="BuyCount" Type="Int32" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsGive" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ShoppingProduct_REFERENCE_Product" FromRole="ShoppingProduct" ToRole="Product" />
+          <NavigationProperty Name="Shopping" Relationship="Self.FK_ShoppingProduct_REFERENCE_Shopping" FromRole="ShoppingProduct" ToRole="Shopping" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="StorageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="StorageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="StorageLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shopping" Relationship="Self.FK_Shopping_REFERENCE_Storage" FromRole="Storage" ToRole="Shopping" />
+          <NavigationProperty Name="StorageType" Relationship="Self.FK_Storage_REFERENCE_StorageType" FromRole="Storage" ToRole="StorageType" />
+          <NavigationProperty Name="StorageRegion" Relationship="Self.FK_StorageRegion_REFERENCE_Storage" FromRole="Storage" ToRole="StorageRegion" />
+        </EntityType>
+        <EntityType Name="StorageLocation">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="MaxVol" Type="Int32" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="StorageRegion" Relationship="Self.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageLocation" ToRole="StorageRegion" />
+        </EntityType>
+        <EntityType Name="StorageRegion">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageId" Type="Int32" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_StorageRegion_REFERENCE_Storage" FromRole="StorageRegion" ToRole="Storage" />
+          <NavigationProperty Name="StorageLocation" Relationship="Self.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageRegion" ToRole="StorageLocation" />
+        </EntityType>
+        <EntityType Name="StorageType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastEditTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_REFERENCE_StorageType" FromRole="StorageType" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierState" Type="Boolean" />
+          <Property Name="PayType" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contract" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shopping" Relationship="Self.FK_Shopping_REFERENCE_Supplier" FromRole="Supplier" ToRole="Shopping" />
+          <NavigationProperty Name="SupplierClass" Relationship="Self.FK_SupplierClass_REFERENCE_Supplier" FromRole="Supplier" ToRole="SupplierClass" />
+        </EntityType>
+        <EntityType Name="SupplierClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <NavigationProperty Name="ProductClass" Relationship="Self.FK_SupplierClass_REFERENCE_ProductClass" FromRole="SupplierClass" ToRole="ProductClass" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SupplierClass_REFERENCE_Supplier" FromRole="SupplierClass" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="V_ProductList">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="BrandID" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="v_shop_product">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ShoppingID" Type="Int32" Nullable="false" />
+          <Property Name="BuyCount" Type="Int32" />
+          <Property Name="OrderPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsGive" Type="Boolean" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="BrandID" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="v_shopping">
+          <Key>
+            <PropertyRef Name="ShoppingID" />
+          </Key>
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShoppingID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="StorageId" Type="Int32" />
+          <Property Name="ShoppingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShoppingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTo" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Byte" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PayType" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Storage_List">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="StorageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="StorageLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_StorageLocation_List">
+          <Key>
+            <PropertyRef Name="LocationID" />
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="MaxVol" Type="Int32" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="StorageId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_StorageRegion_List">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="Int32" Nullable="false" />
+          <Property Name="StorageId" Type="Int32" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="TypeId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_StorageType_List">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastEditTime" Type="DateTime" Precision="3" />
+          <Property Name="AdminId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Product_REFERENCE_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductProperty_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductProperty" Type="Self.ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductProperty">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingProduct_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ShoppingProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierClass_REFERENCE_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="0..1" />
+          <End Role="SupplierClass" Type="Self.SupplierClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="SupplierClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductProperty_REFERENCE_Property">
+          <End Role="Property" Type="Self.Property" Multiplicity="0..1" />
+          <End Role="ProductProperty" Type="Self.ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="ProductProperty">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="Shopping">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_REFERENCE_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="Shopping">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingAudit_REFERENCE_Shopping">
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="0..1" />
+          <End Role="ShoppingAudit" Type="Self.ShoppingAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shopping">
+              <PropertyRef Name="ShoppingID" />
+            </Principal>
+            <Dependent Role="ShoppingAudit">
+              <PropertyRef Name="ShoppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingProduct_REFERENCE_Shopping">
+          <End Role="Shopping" Type="Self.Shopping" Multiplicity="1" />
+          <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shopping">
+              <PropertyRef Name="ShoppingID" />
+            </Principal>
+            <Dependent Role="ShoppingProduct">
+              <PropertyRef Name="ShoppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_REFERENCE_StorageType">
+          <End Role="StorageType" Type="Self.StorageType" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageRegion_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="StorageRegion">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageLocation_REFERENCE_StorageRegion">
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="0..1" />
+          <End Role="StorageLocation" Type="Self.StorageLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageRegion">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="StorageLocation">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierClass_REFERENCE_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierClass" Type="Self.SupplierClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="SupplierClass">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="erp_testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductClass" EntityType="Self.ProductClass" />
+          <EntitySet Name="ProductProperty" EntityType="Self.ProductProperty" />
+          <EntitySet Name="Property" EntityType="Self.Property" />
+          <EntitySet Name="Shopping" EntityType="Self.Shopping" />
+          <EntitySet Name="ShoppingAudit" EntityType="Self.ShoppingAudit" />
+          <EntitySet Name="ShoppingProduct" EntityType="Self.ShoppingProduct" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <EntitySet Name="StorageLocation" EntityType="Self.StorageLocation" />
+          <EntitySet Name="StorageRegion" EntityType="Self.StorageRegion" />
+          <EntitySet Name="StorageType" EntityType="Self.StorageType" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplierClass" EntityType="Self.SupplierClass" />
+          <EntitySet Name="V_ProductList" EntityType="Self.V_ProductList" />
+          <EntitySet Name="v_shop_product" EntityType="Self.v_shop_product" />
+          <EntitySet Name="v_shopping" EntityType="Self.v_shopping" />
+          <EntitySet Name="V_Storage_List" EntityType="Self.V_Storage_List" />
+          <EntitySet Name="V_StorageLocation_List" EntityType="Self.V_StorageLocation_List" />
+          <EntitySet Name="V_StorageRegion_List" EntityType="Self.V_StorageRegion_List" />
+          <EntitySet Name="V_StorageType_List" EntityType="Self.V_StorageType_List" />
+          <AssociationSet Name="FK_Product_REFERENCE_ProductClass" Association="Self.FK_Product_REFERENCE_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClass" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductProperty_REFERENCE_Product" Association="Self.FK_ProductProperty_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductProperty" EntitySet="ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingProduct_REFERENCE_Product" Association="Self.FK_ShoppingProduct_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierClass_REFERENCE_ProductClass" Association="Self.FK_SupplierClass_REFERENCE_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClass" />
+            <End Role="SupplierClass" EntitySet="SupplierClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductProperty_REFERENCE_Property" Association="Self.FK_ProductProperty_REFERENCE_Property">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="ProductProperty" EntitySet="ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_REFERENCE_Storage" Association="Self.FK_Shopping_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Shopping" EntitySet="Shopping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_REFERENCE_Supplier" Association="Self.FK_Shopping_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Shopping" EntitySet="Shopping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingAudit_REFERENCE_Shopping" Association="Self.FK_ShoppingAudit_REFERENCE_Shopping">
+            <End Role="Shopping" EntitySet="Shopping" />
+            <End Role="ShoppingAudit" EntitySet="ShoppingAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingProduct_REFERENCE_Shopping" Association="Self.FK_ShoppingProduct_REFERENCE_Shopping">
+            <End Role="Shopping" EntitySet="Shopping" />
+            <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_REFERENCE_StorageType" Association="Self.FK_Storage_REFERENCE_StorageType">
+            <End Role="StorageType" EntitySet="StorageType" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageRegion_REFERENCE_Storage" Association="Self.FK_StorageRegion_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageLocation_REFERENCE_StorageRegion" Association="Self.FK_StorageLocation_REFERENCE_StorageRegion">
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+            <End Role="StorageLocation" EntitySet="StorageLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierClass_REFERENCE_Supplier" Association="Self.FK_SupplierClass_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierClass" EntitySet="SupplierClass" />
+          </AssociationSet>
+          <FunctionImport Name="fun_ProList" IsComposable="true" ReturnType="Collection(erp_testModel.fun_ProList_Result)">
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="tvpoints" IsComposable="true" ReturnType="Collection(erp_testModel.tvpoints_Result)" />
+          <FunctionImport Name="p_pagedlist">
+            <Parameter Name="table" Mode="In" Type="String" />
+            <Parameter Name="where" Mode="In" Type="String" />
+            <Parameter Name="KeyField" Mode="In" Type="String" />
+            <Parameter Name="ShowField" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_PageList" ReturnType="Collection(erp_testModel.p_PageList_Result)">
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="TypeCode" Mode="In" Type="String" />
+            <Parameter Name="TypeName" Mode="In" Type="String" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="P_SupplierPage" ReturnType="Collection(erp_testModel.P_SupplierPage_Result)">
+            <Parameter Name="supplierName" Mode="In" Type="String" />
+            <Parameter Name="Contact" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="supplierState" Mode="In" Type="Boolean" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="up_pagedlist">
+            <Parameter Name="table" Mode="In" Type="String" />
+            <Parameter Name="where" Mode="In" Type="String" />
+            <Parameter Name="KeyField" Mode="In" Type="String" />
+            <Parameter Name="ShowField" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="up_pagelist">
+            <Parameter Name="table" Mode="In" Type="String" />
+            <Parameter Name="where" Mode="In" Type="String" />
+            <Parameter Name="KeyField" Mode="In" Type="String" />
+            <Parameter Name="ShowField" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="p_PageList_Result">
+          <Property Type="Int64" Name="ID" Nullable="true" />
+          <Property Type="Int32" Name="TypeId" Nullable="false" />
+          <Property Type="String" Name="TypeCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Remark" Nullable="true" />
+          <Property Type="DateTime" Name="LastEditTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="P_SupplierPage_Result">
+          <Property Type="Int64" Name="id" Nullable="true" />
+          <Property Type="Int32" Name="SupplierID" Nullable="false" />
+          <Property Type="String" Name="LevelName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TEL" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="SupplierState" Nullable="true" />
+          <Property Type="Int32" Name="PayType" Nullable="true" />
+          <Property Type="String" Name="Province" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Contract" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AddTime" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="erp_testModelStoreContainer" CdmEntityContainer="erp_testEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="erp_testModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="erp_testModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Spec" ColumnName="Spec" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductClass">
+            <EntityTypeMapping TypeName="erp_testModel.ProductClass">
+              <MappingFragment StoreEntitySet="ProductClass">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ClassOrder" ColumnName="ClassOrder" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductProperty">
+            <EntityTypeMapping TypeName="erp_testModel.ProductProperty">
+              <MappingFragment StoreEntitySet="ProductProperty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="PropertyValue" ColumnName="PropertyValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property">
+            <EntityTypeMapping TypeName="erp_testModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyCode" ColumnName="PropertyCode" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="PropertyOrder" ColumnName="PropertyOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shopping">
+            <EntityTypeMapping TypeName="erp_testModel.Shopping">
+              <MappingFragment StoreEntitySet="Shopping">
+                <ScalarProperty Name="ShoppingID" ColumnName="ShoppingID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="ShoppingCode" ColumnName="ShoppingCode" />
+                <ScalarProperty Name="ShoppingType" ColumnName="ShoppingType" />
+                <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingAudit">
+            <EntityTypeMapping TypeName="erp_testModel.ShoppingAudit">
+              <MappingFragment StoreEntitySet="ShoppingAudit">
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+                <ScalarProperty Name="ShoppingID" ColumnName="ShoppingID" />
+                <ScalarProperty Name="AuditResult" ColumnName="AuditResult" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingProduct">
+            <EntityTypeMapping TypeName="erp_testModel.ShoppingProduct">
+              <MappingFragment StoreEntitySet="ShoppingProduct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ShoppingID" ColumnName="ShoppingID" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+                <ScalarProperty Name="IsGive" ColumnName="IsGive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="erp_testModel.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="StorageCode" ColumnName="StorageCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageLocation">
+            <EntityTypeMapping TypeName="erp_testModel.StorageLocation">
+              <MappingFragment StoreEntitySet="StorageLocation">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="LocationNum" ColumnName="LocationNum" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="MaxVol" ColumnName="MaxVol" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageRegion">
+            <EntityTypeMapping TypeName="erp_testModel.StorageRegion">
+              <MappingFragment StoreEntitySet="StorageRegion">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageType">
+            <EntityTypeMapping TypeName="erp_testModel.StorageType">
+              <MappingFragment StoreEntitySet="StorageType">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="LastEditTime" ColumnName="LastEditTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="erp_testModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierClass">
+            <EntityTypeMapping TypeName="erp_testModel.SupplierClass">
+              <MappingFragment StoreEntitySet="SupplierClass">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ProductList">
+            <EntityTypeMapping TypeName="erp_testModel.V_ProductList">
+              <MappingFragment StoreEntitySet="V_ProductList">
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="AttributeValue" ColumnName="AttributeValue" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Spec" ColumnName="Spec" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_shop_product">
+            <EntityTypeMapping TypeName="erp_testModel.v_shop_product">
+              <MappingFragment StoreEntitySet="v_shop_product">
+                <ScalarProperty Name="ShoppingID" ColumnName="ShoppingID" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+                <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+                <ScalarProperty Name="IsGive" ColumnName="IsGive" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="AttributeValue" ColumnName="AttributeValue" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Spec" ColumnName="Spec" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_shopping">
+            <EntityTypeMapping TypeName="erp_testModel.v_shopping">
+              <MappingFragment StoreEntitySet="v_shopping">
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="ShoppingID" ColumnName="ShoppingID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="ShoppingCode" ColumnName="ShoppingCode" />
+                <ScalarProperty Name="ShoppingType" ColumnName="ShoppingType" />
+                <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Storage_List">
+            <EntityTypeMapping TypeName="erp_testModel.V_Storage_List">
+              <MappingFragment StoreEntitySet="V_Storage_List">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="StorageCode" ColumnName="StorageCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StorageLocation" ColumnName="StorageLocation" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_StorageLocation_List">
+            <EntityTypeMapping TypeName="erp_testModel.V_StorageLocation_List">
+              <MappingFragment StoreEntitySet="V_StorageLocation_List">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="LocationNum" ColumnName="LocationNum" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="MaxVol" ColumnName="MaxVol" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_StorageRegion_List">
+            <EntityTypeMapping TypeName="erp_testModel.V_StorageRegion_List">
+              <MappingFragment StoreEntitySet="V_StorageRegion_List">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_StorageType_List">
+            <EntityTypeMapping TypeName="erp_testModel.V_StorageType_List">
+              <MappingFragment StoreEntitySet="V_StorageType_List">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="LastEditTime" ColumnName="LastEditTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="erp_testModel.Store.fun_ProList" FunctionImportName="fun_ProList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="erp_testModel.fun_ProList_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Spec" ColumnName="Spec" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="erp_testModel.Store.tvpoints" FunctionImportName="tvpoints">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="erp_testModel.tvpoints_Result">
+                <ScalarProperty Name="x" ColumnName="x" />
+                <ScalarProperty Name="y" ColumnName="y" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_pagedlist" FunctionName="erp_testModel.Store.p_pagedlist" />
+          <FunctionImportMapping FunctionImportName="p_PageList" FunctionName="erp_testModel.Store.p_PageList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="erp_testModel.p_PageList_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="LastEditTime" ColumnName="LastEditTime" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="P_SupplierPage" FunctionName="erp_testModel.Store.P_SupplierPage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="erp_testModel.P_SupplierPage_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="up_pagedlist" FunctionName="erp_testModel.Store.up_pagedlist" />
+          <FunctionImportMapping FunctionImportName="up_pagelist" FunctionName="erp_testModel.Store.up_pagelist" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

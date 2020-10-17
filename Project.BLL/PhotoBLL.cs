@@ -12,7 +12,7 @@ using static System.IO.File;
 
 namespace Project.BLL
 {
-    public class PhotoBLL
+    public class PhotoBLL : IBLLBase
     {
         PhotoDAL dal = new PhotoDAL();
 
@@ -150,6 +150,11 @@ namespace Project.BLL
             }
 
             return dal.DeletePhoto(idList);
+        }
+
+        public IModelBase getClassID(int id)
+        {
+            return getModel(id);
         }
     }
 }
