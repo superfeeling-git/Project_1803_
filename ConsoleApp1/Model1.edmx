@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="erp_testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="erp_testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminId" />
@@ -178,6 +178,13 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClassID" Type="int" />
           <Property Name="SupplierID" Type="int" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“erp_test.dbo.V_ProductList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -581,6 +588,7 @@
           <EntitySet Name="StorageType" EntityType="Self.StorageType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierClass" EntityType="Self.SupplierClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="V_ProductList" EntityType="Self.V_ProductList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_ProductList].[ClassName] AS [ClassName], 
@@ -756,8 +764,7 @@
             <End Role="SupplierClass" EntitySet="SupplierClass" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="erp_testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1345,7 +1352,7 @@
             <End Role="SupplierClass" EntitySet="SupplierClass" />
           </AssociationSet>
           <FunctionImport Name="fun_ProList" IsComposable="true" ReturnType="Collection(erp_testModel.fun_ProList_Result)">
-            <Parameter Name="price" Mode="In" Type="Decimal" />
+          <Parameter Name="price" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="tvpoints" IsComposable="true" ReturnType="Collection(erp_testModel.tvpoints_Result)" />
           <FunctionImport Name="p_pagedlist">
@@ -1396,6 +1403,7 @@
             <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
             <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="test" EntityType="erp_testModel.test" />
         </EntityContainer>
         <ComplexType Name="p_PageList_Result">
           <Property Type="Int64" Name="ID" Nullable="true" />
@@ -1423,6 +1431,13 @@
           <Property Type="String" Name="Contract" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="AddTime" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1816,6 +1831,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="up_pagedlist" FunctionName="erp_testModel.Store.up_pagedlist" />
           <FunctionImportMapping FunctionImportName="up_pagelist" FunctionName="erp_testModel.Store.up_pagelist" />
+          <EntitySetMapping Name="test">
+            <EntityTypeMapping TypeName="erp_testModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

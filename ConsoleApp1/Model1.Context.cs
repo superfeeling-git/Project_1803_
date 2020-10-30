@@ -48,6 +48,7 @@ namespace ConsoleApp1
         public virtual DbSet<V_StorageLocation_List> V_StorageLocation_List { get; set; }
         public virtual DbSet<V_StorageRegion_List> V_StorageRegion_List { get; set; }
         public virtual DbSet<V_StorageType_List> V_StorageType_List { get; set; }
+        public virtual DbSet<test> test { get; set; }
     
         [DbFunction("erp_testEntities", "fun_ProList")]
         public virtual IQueryable<fun_ProList_Result> fun_ProList(Nullable<decimal> price)
